@@ -404,12 +404,21 @@
             width: 100%;
             text-align: center;
         }
+        .restaurant-logo {
+            display: block;
+            margin: 0 auto 25px auto;
+            width: 180px;
+            height: auto;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
+            animation: subtle-pulse 4s infinite ease-in-out;
+        }
         .location-text h3 {
             font-size: 2.2em;
             font-weight: 500;
             margin-bottom: 15px;
             color: white;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            animation: pulse-title 4s infinite ease-in-out;
         }
         .location-text .google-rating {
             font-size: 1.2em;
@@ -605,6 +614,28 @@
             }
         }
 
+        @keyframes pulse-title {
+            0%, 100% {
+                transform: scale(1);
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            }
+            50% {
+                transform: scale(1.02);
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        @keyframes subtle-pulse {
+            0%, 100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
+            }
+            50% {
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.5));
+            }
+        }
+
         .footer {
             position: relative;
             text-align: center;
@@ -762,6 +793,7 @@
 
             <div class="location-section">
                 <div class="location-text">
+                    <img src="Logo_ambar.png" alt="Logo Âmbar Restaurante & Bar" class="restaurant-logo">
                     <h3>Âmbar Restaurante & Bar</h3>
                     <p class="location-description">Vencedor 4 vezes do premio Bom gourmet. O Âmbar é o lugar ideal para quem busca noites elegantes, drinks sofisticados e uma experiência completa em um ambiente moderno e aconchegante.</p>
                     <p class="google-rating">
@@ -793,8 +825,8 @@
                     <li><strong>Tempo de Festa:</strong> 06 horas de festa</li>
                     <li class="info-spacer"></li>
                     <li><strong>Dress Code:</strong> Esporte Fino</li>
-                    <li><strong>Local possui Fumódromo:</strong> Sim possui</li>
-                    <li><strong>Local possui Estacionamento:</strong> Não possui</li>
+                    <li><strong>Local possui Fumódromo:</strong> Sim possui.</li>
+                    <li><strong>Local possui Estacionamento:</strong> Não possui.</li>
                     <li class="info-spacer"></li>
                     <li><strong>Endereço do Local:</strong> R. Cel. Dulcídio, 918 - Batel, Curitiba - PR, 80420-170</li>
                     <li><strong>Tempo médio da Odoo até o Local:</strong> 08 minutos de Carro</li>
@@ -857,7 +889,7 @@
                             A Mesa de Antepastos vai ficar disposta o evento todo para consumo!
                         </p>
                         <div class="menu-buttons-container">
-                            <div class="map-button">Pães Artesanais & Focaccias</div>
+                            <div class="map-button">Pães artesanais e focaccias</div>
                             <div class="map-button">Pastas & Patês Variados</div>
                             <div class="map-button">Conservas Selecionadas</div>
                             <div class="map-button">Embutidos & Frios</div>
