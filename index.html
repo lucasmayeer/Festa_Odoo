@@ -644,6 +644,7 @@
             border-radius: 50%;
             transition: width 0.4s ease-in-out, border-radius 0.4s ease-in-out;
             animation: subtle-bounce 2.5s infinite ease-in-out 1.5s;
+            text-decoration: none;
         }
 
         .floating-help-button:hover {
@@ -897,11 +898,15 @@
             cursor: pointer;
             font-weight: 500;
             font-size: 1.1em;
-            color: white; /* Changed to white */
+            color: white; 
             transition: color 0.3s ease;
         }
         .faq-question:hover {
             color: #E4A900;
+        }
+        .faq-question span:first-of-type {
+            text-align: left;
+            padding-right: 15px; /* Add space between text and icon */
         }
 
         .faq-icon {
@@ -917,9 +922,7 @@
             overflow: hidden;
             transition: max-height 0.4s ease-out;
         }
-        .faq-item.active .faq-answer {
-            /* padding-top is now on the p tag */
-        }
+        
         .faq-answer p {
             font-size: 1em;
             opacity: 0.8;
@@ -1399,7 +1402,7 @@
             </div>
 
             <!-- FAQ SECTION -->
-            <div class="info-topic">
+            <div class="info-topic" id="faq-anchor">
                 <h3>Perguntas Frequentes</h3>
                 <p class="faq-section-description">Encontre aqui as principais dúvidas sobre o evento. Se a sua não estiver na lista, entre em contato com o LUEM.</p>
                 <div class="faq-search-container">
@@ -1495,10 +1498,10 @@
     </footer>
 
     <!-- Floating Help Button -->
-    <div class="floating-help-button">
+    <a href="#" class="floating-help-button">
         <div class="help-icon">?</div>
         <span class="help-text">Com dúvidas? Procure pelo Facilities!</span>
-    </div>
+    </a>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -1779,11 +1782,11 @@
                     answer: "Sim. O local possui fumódromo e áreas abertas para fumantes."
                 },
                 {
-                    question: "O local tem estacionamento?",
+                    question: "O Âmbar tem estacionamento?",
                     answer: "Sim. Há serviço terceirizado de valet e vagas próximas. Porém, recomendamos ir de Uber por ser região central."
                 },
                 {
-                    question: "A festa será open all night?",
+                    question: "A festa será OPEN BAR e OPEN FOOD all night?",
                     answer: "Sim. Comida e bebida estarão liberadas do início ao fim do evento."
                 },
                 {
@@ -1918,6 +1921,32 @@
 
             // Initial display
             displayFaqs(currentPage);
+
+            // --- FLOATING BUTTON FAQ LINK ---
+            const floatButton = document.querySelector('.floating-help-button');
+            if (floatButton) {
+                floatButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    // Navigate to the "Sobre o Evento" section
+                    const navLink = document.querySelector('a.nav-item[data-page="sobre-o-evento"]');
+                    if (navLink) {
+                        // Close mobile nav if open
+                        if (document.body.classList.contains('nav-open')) {
+                            document.body.classList.remove('nav-open');
+                        }
+                        navLink.click();
+                    }
+
+                    // Scroll to the FAQ section after a short delay for the page transition
+                    setTimeout(() => {
+                        const faqSection = document.getElementById('faq-anchor');
+                        if (faqSection) {
+                            faqSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }, 400); // Increased delay to account for nav and page animation
+                });
+            }
 
         });
     </script>
