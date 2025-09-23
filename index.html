@@ -1032,6 +1032,10 @@
             padding: 5px;
         }
 
+        .mobile-menu-logo {
+            display: none; /* Escondido por padrão */
+        }
+
         body.nav-open .mobile-menu-toggle {
             display: none;
         }
@@ -1081,6 +1085,12 @@
 
             .mobile-menu-toggle {
                 display: block; /* Mostra o botão do menu */
+            }
+
+            body.nav-open .mobile-menu-logo {
+                display: block;
+                width: 150px;
+                margin-bottom: 40px;
             }
 
             .mobile-menu-close {
@@ -1318,6 +1328,7 @@
             </svg>
         </button>
         <nav class="nav-container">
+            <img src="odoo_logo_inverted.svg" alt="Odoo Brasil" class="mobile-menu-logo">
             <button class="mobile-menu-close" aria-label="Fechar menu">&times;</button>
             <a href="#" class="nav-item active" data-page="cronometro">Cronômetro</a>
             <a href="#" class="nav-item" data-page="informacoes">Save The Date</a>
@@ -1414,7 +1425,7 @@
             <div class="info-topic">
                 <img src="odoo_logo_inverted.svg" alt="Odoo Brasil" class="odoo-logo-breathe">
                 <p class="info-text-container" style="font-style: italic; opacity: 0.9; margin-bottom: 30px; line-height: 1.6; text-align: center; font-size: 1.1em;">
-                    A Odoo Brasil reservou com exclusividade a casa do Âmbar Bar & Restaurante para comemorar o encerramento de 2025. Será uma noite de celebração, alegria e reconhecimento por todas as conquistas que marcaram este ano.
+                    A Odoo Brasil reservou com exclusividade a casa do Âmbar Bar & Restaurante para comemorar o encerramento de 2025. Será uma noite de celebração, alegria e reconhecimento por todas as conquistas que marcaram este ano...
                     <br><br>
                     Você foi peça fundamental para o sucesso da Odoo, e essa festa é a nossa forma de agradecer pela sua dedicação e contribuição!
                 </p>
@@ -1439,7 +1450,7 @@
                 <div class="photographer-card">
                     <img src="foto_fotografia.png" alt="Foto da Fotógrafa" class="photographer-photo">
                     <h4 class="photographer-name">MAYA | Fotografia, Vídeo e Criação de Conteúdo</h4>
-                    <p class="photographer-caption">A número 1 de Curitiba estará no nosso evento! Vem ver o que torna o trabalho dela único.</p>
+                    <p class="photographer-caption">A TOP 01 de Curitiba estará no nosso evento! Vem ver o que torna o trabalho dela único.</p>
                     <a href="https://www.instagram.com/maya.ph__?igsh=Z3lxbHkxOThweG5v" target="_blank" class="photographer-instagram">Ver Instagram</a>
                 </div>
             </div>
@@ -2022,6 +2033,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 
