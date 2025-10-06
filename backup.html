@@ -162,7 +162,7 @@
             display: flex;
         }
 
-        #cronometro, #informacoes-gerais, #presidents-club {
+        #cronometro, #informacoes-gerais, #cardapio, #presidents-club {
             min-height: calc(100vh - 200px);
         }
 
@@ -192,13 +192,16 @@
         .time-label { font-size: 0.8em; color: white; margin-top: 10px; letter-spacing: 1px; }
         .separator { font-size: 3em; color: white; animation: blink 1s infinite; margin: 0 10px; display: flex; align-items: center; padding-bottom: 30px; }
 
-        /* --- ESTILOS PARA SEÇÃO DE INFORMAÇÕES (SEM CAIXA) --- */
-        #informacoes-gerais {
+        /* --- ESTILOS PARA SEÇÃO DE INFORMAÇÕES E CARDÁPIO (SEM CAIXA) --- */
+        #informacoes-gerais, #cardapio {
             background: none;
             backdrop-filter: none;
             border-radius: 0;
             padding: 40px 0;
             align-items: flex-start;
+        }
+        #cardapio {
+            align-items: center;
         }
 
         .info-topic {
@@ -505,6 +508,90 @@
             50% { transform: scale(1.05); }
         }
         
+        /* ESTILOS DO CARDÁPIO COM LAYOUT LATERAL */
+        .menu-tabs-container {
+            width: 100%;
+            overflow-x: auto;
+             -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .menu-tabs-container::-webkit-scrollbar {
+            display: none;
+        }
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 30px;
+            flex-wrap: nowrap;
+        }
+        .menu-tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 500;
+            color: rgba(255,255,255,0.7);
+            border: none;
+            background: none;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+        }
+        .menu-tab::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #E4A900;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        .menu-tab.active {
+            color: white;
+        }
+        .menu-tab.active::after {
+            transform: scaleX(1);
+        }
+        .menu-content-area {
+            padding: 30px 0;
+            min-height: 300px;
+            text-align: center;
+        }
+        .menu-tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .menu-tab-content.active {
+            display: block;
+        }
+        .menu-description {
+            font-style: italic;
+            opacity: 0.8;
+            margin-bottom: 25px;
+            font-size: 1.1em;
+        }
+        .menu-buttons-container {
+            margin: 25px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            justify-content: center;
+        }
+        .menu-buttons-container .map-button {
+            width: 320px;
+            animation: pulse-button 3s infinite ease-in-out;
+            cursor: default;
+        }
+        
+        .menu-buttons-container .map-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transform: none;
+        }
+
         .typing-subtitle {
             border-right: 3px solid rgba(255, 255, 255, 0.75);
             white-space: nowrap;
@@ -662,11 +749,6 @@
         @keyframes textGlitch { 0%, 95%, 100% { transform: translate(0); color: white; text-shadow: none; } 96% { transform: translate(-1px, -1px); color: #ff0040; text-shadow: 1px 0 #00ffff; } 97% { transform: translate(1px, 1px); color: #00ffff; text-shadow: -1px 0 #ff0040; } }
         @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0.3; } }
         
-        @keyframes shine {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
-
         .playlist-section-container {
             display: flex;
             flex-direction: column;
@@ -799,175 +881,6 @@
             background-color: white;
             color: #714B67;
             transform: scale(1.05);
-        }
-
-        /* --- ESTILOS SEÇÃO PRÊMIOS --- */
-        .prizes-grid {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 40px;
-            width: 100%;
-        }
-
-        .prize-card {
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 25px;
-            flex: 1;
-            text-align: center;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .prize-card:hover {
-            transform: translateY(-8px);
-            background-color: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-        }
-
-        .prize-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-            border: 3px solid #E4A900;
-        }
-
-        .prize-title {
-            font-size: 1.3em;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: white;
-        }
-
-        .prize-subtitle {
-            font-size: 1em;
-            font-weight: 400;
-            color: #E4A900;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .prize-description {
-            font-style: italic;
-            font-size: 0.9em;
-            opacity: 0.8;
-            color: white;
-            line-height: 1.5;
-        }
-
-        /* --- ESTILOS UPGRADE PROGRESS BAR --- */
-        .upgrade-progress-container {
-            width: 100%;
-            max-width: 800px;
-            margin: 40px auto 0 auto;
-        }
-
-        .progress-track {
-            width: 100%;
-            height: 24px;
-            background-color: rgba(0, 0, 0, 0.3);
-            border-radius: 12px;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #21B799, #E4A900, #21B799);
-            background-size: 200% 100%;
-            border-radius: 12px;
-            transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-            animation: shine 3s linear infinite;
-        }
-        
-        .progress-percentage {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-weight: 700;
-            font-size: 0.8em;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-        }
-
-        .upgrade-deadline {
-            font-size: 0.9em;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 12px;
-            text-align: center;
-        }
-
-        .upgrade-items-grid {
-            display: flex;
-            justify-content: space-around;
-            gap: 20px;
-            margin-top: 25px;
-            flex-wrap: wrap;
-            align-items: flex-start;
-        }
-
-        .upgrade-item {
-            text-align: center;
-            transition: all 0.4s ease;
-            opacity: 0.6;
-            padding: 10px;
-            width: 100%;
-            max-width: 200px;
-        }
-
-        .upgrade-item.unlocked {
-            opacity: 1;
-        }
-
-        .upgrade-status-wrapper {
-            margin-bottom: 12px;
-        }
-        .upgrade-status-icon {
-            font-size: 1.6em;
-        }
-        .upgrade-status-text {
-            font-size: 0.8em;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .upgrade-title {
-            font-size: 1.1em;
-            font-weight: 500;
-            margin-bottom: 5px;
-        }
-        
-        .upgrade-challenge {
-            font-size: 0.9em;
-            font-style: normal;
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.7);
-            margin-top: 8px;
-            line-height: 1.4;
-        }
-        
-        .upgrade-item.unlocked .upgrade-title {
-            color: #E4A900;
-        }
-
-        .upgrade-items-grid:hover .upgrade-item {
-            filter: blur(3px);
-            opacity: 0.5;
-            transform: scale(0.95);
-        }
-        
-        .upgrade-items-grid .upgrade-item:hover {
-            filter: none;
-            opacity: 1;
-            transform: scale(1);
         }
 
         /* FAQ specific styles */
@@ -1223,7 +1136,7 @@
             }
 
             /* Reduz a altura mínima para não criar espaços vazios desnecessários */
-            .page-section, #cronometro, #informacoes-gerais, #presidents-club {
+            .page-section, #cronometro, #informacoes-gerais, #cardapio, #presidents-club {
                 min-height: auto;
                 padding-top: 20px;
                 padding-bottom: 20px;
@@ -1311,14 +1224,6 @@
                 width: 100%;
                 max-width: 300px;
             }
-
-            .upgrade-items-grid {
-                flex-direction: column;
-                align-items: center;
-            }
-            .upgrade-item {
-                max-width: 300px;
-            }
         }
         
         /* Ajuste específico para o botão flutuante em telas médias */
@@ -1370,6 +1275,18 @@
                 font-size: 0.9em;
             }
             
+            .menu-tabs {
+                justify-content: flex-start; /* Permite scroll horizontal nas abas do menu */
+            }
+            .menu-tab {
+                font-size: 1em;
+                padding: 12px 20px;
+            }
+
+            .menu-buttons-container .map-button {
+                width: 100%;
+            }
+            
             .floating-help-button {
                 height: 50px;
                 width: 50px;
@@ -1416,6 +1333,7 @@
             <a href="#" class="nav-item active" data-page="cronometro">Cronômetro</a>
             <a href="#" class="nav-item" data-page="informacoes">Save The Date</a>
             <a href="#" class="nav-item" data-page="sobre-o-evento">Sobre o Evento</a>
+            <a href="#" class="nav-item" data-page="cardapio">Cardápio</a>
             <a href="#" class="nav-item" data-page="presidents-club">President's Club</a>
         </nav>
     </header>
@@ -1584,90 +1502,73 @@
 
         </section>
         
-        <!-- SEÇÃO 5: PRESIDENT'S CLUB -->
-        <section id="presidents-club" class="page-section" style="justify-content: flex-start; padding-top: 8vh;">
+        <!-- SEÇÃO 4: CARDÁPIO -->
+        <section id="cardapio" class="page-section">
             <div class="info-topic">
-                <h3 style="font-size: 2.5em; font-weight: 700;">President's Club</h3>
-                <p style="font-size: 1.4em; line-height: 1.6; max-width: 700px; margin: 10px auto 0 auto; font-style: italic; opacity: 0.9;">
-                    A grande apresentação final dos resultados de 2025, acompanhada da premiação dos top performers do ano nas áreas de  BSA, Customer Success, Direct Sales e HR.
-                </p>
-
-                <div class="prizes-grid">
-                    <div class="prize-card">
-                        <img src="https://placehold.co/150x150/FFFFFF/714B67?text=🏆" alt="Ícone do Prêmio" class="prize-icon">
-                        <h4 class="prize-title">Back-Office</h4>
-                        <h5 class="prize-subtitle">THE GOAT</h5>
-                        <p class="prize-description">Top perfomance de 2025!</p>
-                    </div>
-                    <div class="prize-card">
-                        <img src="https://placehold.co/150x150/FFFFFF/714B67?text=🏆" alt="Ícone do Prêmio" class="prize-icon">
-                        <h4 class="prize-title">BSA</h4>
-                        <h5 class="prize-subtitle">THE GOAT</h5>
-                        <p class="prize-description">Top perfomance de 2025!</p>
-                    </div>
-                    <div class="prize-card">
-                        <img src="https://placehold.co/150x150/FFFFFF/714B67?text=🏆" alt="Ícone do Prêmio" class="prize-icon">
-                        <h4 class="prize-title">CS</h4>
-                        <h5 class="prize-subtitle">THE GOAT</h5>
-                        <p class="prize-description">Top perfomance de 2025!</p>
-                    </div>
-                    <div class="prize-card">
-                        <img src="https://placehold.co/150x150/FFFFFF/714B67?text=🏆" alt="Ícone do Prêmio" class="prize-icon">
-                        <h4 class="prize-title">Direct Sales</h4>
-                        <h5 class="prize-subtitle">THE GOAT</h5>
-                        <p class="prize-description">Top perfomance de 2025!</p>
+                <h3>Cardápio do Evento</h3>
+                <div class="menu-tabs-container">
+                    <div class="menu-tabs">
+                        <button class="menu-tab active" data-tab="antepastos">Mesa de Antepastos</button>
+                        <button class="menu-tab" data-tab="finger-food">Finger Food & Sobremesa</button>
+                        <button class="menu-tab" data-tab="lanche">Lanche da Madrugada</button>
+                        <button class="menu-tab" data-tab="bebidas">Bebidas</button>
                     </div>
                 </div>
-
-                <h4 style="font-size: 2em; font-weight: 600; margin-top: 80px; color: #E4A900;">E que tal um Upgrade?</h4>
-                <p style="font-size: 1.2em; line-height: 1.6; max-width: 700px; margin: 15px auto 0 auto; font-style: italic; opacity: 0.9;">
-                    O nosso Q4 vai definir a nossa grande festa de fim de ano. Cada desafio vencido, cada meta batida e cada esforço dos times da Odoo Brasil vai liberar novos upgrades para tornar a celebração ainda mais inesquecível.
-                </p>
-
-                <!-- Seção da Barra de Progresso -->
-                <div class="upgrade-progress-container">
-                    <p class="upgrade-deadline">Prazo final para o upgrade: 01/12/2025</p>
-                    <div class="progress-track">
-                        <!-- A largura aqui define o progresso. 25% para 1/4, 50% para 2/4, etc. -->
-                        <div class="progress-fill" id="upgrade-progress-fill" style="width: 0%;"></div>
-                        <span class="progress-percentage" id="upgrade-progress-percentage">0%</span>
+                <div class="menu-content-area">
+                    <div id="antepastos-content" class="menu-tab-content active">
+                        <h4 class="typing-subtitle" data-text="Mesa de Antepastos" style="font-size: 1.5em; font-weight: 500; margin-bottom: 20px; display: inline-block; vertical-align: top; min-height: 27px;"></h4>
+                        <p class="menu-description">A Mesa de Antepastos vai ficar disposta o evento todo para consumo!</p>
+                        <div class="menu-buttons-container">
+                            <div class="map-button">Pães artesanais e focaccias</div>
+                            <div class="map-button">Pastas & Patês Variados</div>
+                            <div class="map-button">Conservas Selecionadas</div>
+                            <div class="map-button">Embutidos & Frios</div>
+                        </div>
+                        <p class="menu-description" style="margin-top: 25px; margin-bottom: 0;">Será incluída uma opção vegana.</p>
                     </div>
-                    <div class="upgrade-items-grid">
-                        <div class="upgrade-item">
-                            <div class="upgrade-status-wrapper">
-                                <span class="upgrade-status-icon">🔒</span>
-                                <p class="upgrade-status-text">Bloqueado</p>
-                            </div>
-                            <h5 class="upgrade-title">Direct Sales</h5>
-                            <p class="upgrade-challenge">Descrição do desafio para este departamento.</p>
+                    <div id="finger-food-content" class="menu-tab-content">
+                        <h4 class="typing-subtitle" data-text="Finger Food & Sobremesa" style="font-size: 1.5em; font-weight: 500; margin-bottom: 20px; display: inline-block; vertical-align: top; min-height: 27px;"></h4>
+                        <p class="menu-description">O Cardápio de Finger Food e Sobremesa serão circulantes com 2 passagens ao longo do evento.</p>
+                        <div class="menu-buttons-container">
+                            <div class="map-button">Mini Choripan</div>
+                            <div class="map-button">Frango à Paris</div>
+                            <div class="map-button">Mignon ao Molho de Queijo</div>
+                            <div class="map-button">Mini Espeto de Pernil BBQ</div>
+                            <div class="map-button">Brownie Toffee</div>
                         </div>
-                        <div class="upgrade-item">
-                            <div class="upgrade-status-wrapper">
-                                <span class="upgrade-status-icon">🔒</span>
-                                <p class="upgrade-status-text">Bloqueado</p>
-                            </div>
-                            <h5 class="upgrade-title">Customer Success</h5>
-                            <p class="upgrade-challenge">Descrição do desafio para este departamento.</p>
+                        <p class="menu-description" style="margin-top: 25px; margin-bottom: 0;">Será incluída uma opção vegana.</p>
+                    </div>
+                    <div id="lanche-content" class="menu-tab-content">
+                        <h4 class="typing-subtitle" data-text="Lanche da Madrugada" style="font-size: 1.5em; font-weight: 500; margin-bottom: 20px; display: inline-block; vertical-align: top; min-height: 27px;"></h4>
+                        <p class="menu-description">Será servido a partir de 00:00 e ficará disponível até o final do Evento.</p>
+                        <div class="menu-buttons-container">
+                            <div class="map-button">Cone de Batata Rústica com Cheddar & Bacon</div>
+                            <div class="map-button">Mini Choripan</div>
                         </div>
-                        <div class="upgrade-item">
-                            <div class="upgrade-status-wrapper">
-                                <span class="upgrade-status-icon">🔒</span>
-                                <p class="upgrade-status-text">Bloqueado</p>
-                            </div>
-                            <h5 class="upgrade-title">Business Systems Analyst</h5>
-                            <p class="upgrade-challenge">Descrição do desafio para este departamento.</p>
-                        </div>
-                        <div class="upgrade-item">
-                            <div class="upgrade-status-wrapper">
-                                <span class="upgrade-status-icon">🔒</span>
-                                <p class="upgrade-status-text">Bloqueado</p>
-                            </div>
-                            <h5 class="upgrade-title">Human Resources</h5>
-                            <p class="upgrade-challenge">Descrição do desafio para este departamento.</p>
+                    </div>
+                    <div id="bebidas-content" class="menu-tab-content">
+                        <h4 class="typing-subtitle" data-text="Carta de Bebidas" style="font-size: 1.5em; font-weight: 500; margin-bottom: 20px; display: inline-block; vertical-align: top; min-height: 27px;"></h4>
+                        <p class="menu-description">Nossa carta de bebidas conta com Chope, Drinks & Soft Drinks</p>
+                        <div class="menu-buttons-container">
+                            <div class="map-button">Chope Pilsen</div>
+                            <div class="map-button">Moscow Mule</div>
+                            <div class="map-button">Gin Tônica</div>
+                            <div class="map-button">Caipirinha de Limão</div>
+                            <div class="map-button">Água com & sem gás</div>
+                            <div class="map-button">Coca-Cola (Normal & Zero)</div>
+                            <div class="map-button">Guaraná (Normal & Zero)</div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
+        <!-- SEÇÃO 5: PRESIDENT'S CLUB -->
+        <section id="presidents-club" class="page-section">
+            <div class="info-topic">
+                <h2 style="font-size: 2.5em; font-weight: 800; color: #E4A900; text-transform: uppercase; animation: pulse-warning 2s infinite ease-in-out; line-height: 1.4;">
+                    Eiii!<br>Ainda estamos produzindo essa parte
+                </h2>
             </div>
         </section>
     </main>
@@ -1724,6 +1625,7 @@
                         'cronometro': 'cronometro',
                         'informacoes': 'informacoes',
                         'sobre-o-evento': 'sobre-o-evento',
+                        'cardapio': 'cardapio',
                         'presidents-club': 'presidents-club'
                     };
 
@@ -1869,6 +1771,78 @@
             }, 1500);
 
             animate();
+
+            // --- MENU AND TYPING EFFECT SCRIPT ---
+            const menuTabs = document.querySelectorAll('.menu-tab');
+            const menuContents = document.querySelectorAll('.menu-tab-content');
+            let currentTypingTimeout;
+
+            function startTypingEffect(element) {
+                if (!element || !element.closest('.menu-tab-content.active')) return;
+                
+                if (currentTypingTimeout) {
+                    clearTimeout(currentTypingTimeout);
+                }
+
+                const text = element.getAttribute('data-text');
+                if (!text) return;
+
+                let textIndex = 0;
+                let isDeleting = false;
+                element.textContent = '';
+
+                function typeWriter() {
+                    if (!element.closest('.menu-tab-content.active')) {
+                        element.textContent = '';
+                        return; 
+                    }
+                    
+                    element.textContent = text.substring(0, textIndex);
+                    const speed = isDeleting ? 75 : 150;
+                    let pause = speed;
+
+                    if (!isDeleting) {
+                        if (textIndex < text.length) {
+                            textIndex++;
+                        } else {
+                            pause = 2000; // Pause when typing is done
+                            isDeleting = true;
+                        }
+                    } else {
+                        if (textIndex > 0) {
+                            textIndex--;
+                        } else {
+                            pause = 500; // Pause when text is deleted
+                            isDeleting = false;
+                        }
+                    }
+                    
+                    currentTypingTimeout = setTimeout(typeWriter, pause);
+                }
+                typeWriter();
+            }
+
+            menuTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    menuTabs.forEach(item => item.classList.remove('active'));
+                    menuContents.forEach(content => content.classList.remove('active'));
+
+                    tab.classList.add('active');
+                    const contentId = tab.dataset.tab + '-content';
+                    const targetContent = document.getElementById(contentId);
+
+                    if (targetContent) {
+                        targetContent.classList.add('active');
+                        const typingElement = targetContent.querySelector('.typing-subtitle');
+                        startTypingEffect(typingElement);
+                    }
+                });
+            });
+
+            const initialTypingElement = document.querySelector('.menu-tab-content.active .typing-subtitle');
+            if (initialTypingElement) {
+                startTypingEffect(initialTypingElement);
+            }
 
             // --- FAQ ACCORDION, SEARCH, AND PAGINATION ---
             const allFaqs = [
@@ -2059,3 +2033,12 @@
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
