@@ -957,7 +957,7 @@
         .upgrade-item.unlocked .upgrade-title {
             color: #E4A900;
         }
-
+        
         .upgrade-items-grid:hover .upgrade-item {
             filter: blur(3px);
             opacity: 0.5;
@@ -969,6 +969,16 @@
             opacity: 1;
             transform: scale(1);
         }
+
+        /* NOVA CLASSE PARA AS LISTAS DE METAS */
+        .upgrade-goal-list {
+            list-style: none;
+            padding: 0;
+            font-size: 0.75em; /* Fonte levemente menor */
+            line-height: 1.6;
+            text-align: center;
+        }
+
 
         /* FAQ specific styles */
         .faq-container {
@@ -1626,7 +1636,7 @@
 
                 <!-- Seção da Barra de Progresso -->
                 <div class="upgrade-progress-container">
-                    <p class="upgrade-deadline">Prazo final para o upgrade: 01/12/2025</p>
+                    <p class="upgrade-deadline">PRAZO FINAL PARA O UPGRADE: 01/12/2025</p>
                     <div class="progress-track">
                         <!-- A largura aqui define o progresso. 25% para 1/4, 50% para 2/4, etc. -->
                         <div class="progress-fill" id="upgrade-progress-fill" style="width: 0%;"></div>
@@ -1646,8 +1656,16 @@
                                 <span class="upgrade-status-icon">🔒</span>
                                 <p class="upgrade-status-text">Bloqueado</p>
                             </div>
-                            <h5 class="upgrade-title">Customer Success</h5>
-                            <p class="upgrade-challenge">Descrição do desafio para este departamento.</p>
+                            <h5 class="upgrade-title">Human Resources</h5>
+                            <div class="upgrade-challenge" style="padding: 0 10px;">
+                                <p style="font-weight: 500; margin-bottom: 8px;">Meta de Contratações:</p>
+                                <ul class="upgrade-goal-list">
+                                    <li>Vagas de BSA's: <br><strong>0 / 8</strong> ❌</li>
+                                    <li>Vagas de Direct Sales: <br><strong>0 / 14</strong> ❌</li>
+                                    <li>Vagas de Financeiro: <br><strong>0 / 2</strong> ❌</li>
+                                    <li>Vagas de CS: <br><strong>0 / 2</strong> ❌</li>
+                                </ul>
+                            </div>
                         </div>
                         <div class="upgrade-item">
                             <div class="upgrade-status-wrapper">
@@ -1655,15 +1673,26 @@
                                 <p class="upgrade-status-text">Bloqueado</p>
                             </div>
                             <h5 class="upgrade-title">Business Systems Analyst</h5>
-                            <p class="upgrade-challenge">Descrição do desafio para este departamento.</p>
+                            <div class="upgrade-challenge" style="padding: 0 10px;">
+                                <ul class="upgrade-goal-list" style="line-height: 1.8;">
+                                    <li>Média de Billable:<br><strong>0% / 60% ❌</strong></li>
+                                    <li style="margin-top: 8px;">Projetos com Go Lives:<br><strong>0% / 75% ❌</strong></li>
+                                    <li style="margin-top: 8px;">Conversão de Pré vendas + Buddy:<br><strong>0% / 50% ❌</strong></li>
+                                </ul>
+                            </div>
                         </div>
                         <div class="upgrade-item">
                             <div class="upgrade-status-wrapper">
                                 <span class="upgrade-status-icon">🔒</span>
                                 <p class="upgrade-status-text">Bloqueado</p>
                             </div>
-                            <h5 class="upgrade-title">Human Resources</h5>
-                            <p class="upgrade-challenge">Descrição do desafio para este departamento.</p>
+                            <h5 class="upgrade-title">Customer Success</h5>
+                            <div class="upgrade-challenge" style="padding: 0 10px;">
+                                <p style="font-weight: 500; margin-bottom: 8px;">Mudanças de Planos:</p>
+                                <ul class="upgrade-goal-list">
+                                    <li>Planos Convertidos: <br><strong>0 / 10</strong> ❌</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1921,8 +1950,8 @@
                     answer: "Sim. Basta informar seu nome na entrada."
                 },
                 {
-                    question: "Como receberei os prêmios do President's Club?",
-                    answer: "Eles serão anunciados na festa, mas entregues na segunda-feira (22/12/2025) no escritório, para maior segurança e comodidade."
+                    question: "Como será feita a premiação do President's Club?",
+                    answer: "Os prêmios serão anunciados na festa, mas entregues na segunda-feira (22/12/2025) no escritório, com maior segurança e comodidade para os ganhadores."
                 },
                 {
                     question: "Preciso levar convite?",
