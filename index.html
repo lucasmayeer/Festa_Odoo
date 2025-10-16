@@ -981,6 +981,23 @@
             text-align: center; /* Alterado para center */
         }
 
+        .upgrade-calculation-explanation {
+            margin-top: 30px;
+            font-size: 0.9em;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            text-align: center;
+        }
+        .upgrade-calculation-explanation strong {
+            color: #E4A900;
+            font-weight: 500;
+            font-style: normal;
+        }
+
 
         /* FAQ specific styles */
         .faq-container {
@@ -1663,7 +1680,7 @@
                             <h5 class="upgrade-title">Direct<br>Sales</h5>
                             <div class="upgrade-challenge" style="padding: 0;">
                                 <ul class="upgrade-goal-list">
-                                    <li>Planos Multianuais:<br><strong>0 / 10</strong> ❌</li>
+                                    <li>Planos Multianuais:<br><strong>4 / 10</strong> ❌ <span id="ds-goal1-perc" style="font-weight: 500;"></span></li>
                                     <li style="margin-top: 8px;">MRR & NRR de Outubro<br>superar os de Setembro:<br><strong>0 / 1 ❌</strong></li>
                                     <li style="margin-top: 8px;">MRR & NRR de Novembro<br>superar os de Outubro:<br><strong>0 / 1 ❌</strong></li>
                                 </ul>
@@ -1680,7 +1697,7 @@
                                     <li>Vagas de BSA's:<br><strong>0 / 8</strong> ❌</li>
                                     <li style="margin-top: 8px;">Vagas de Direct Sales:<br><strong>0 / 14</strong> ❌</li>
                                     <li style="margin-top: 8px;">Vagas de Financeiro:<br><strong>0 / 2</strong> ❌</li>
-                                    <li style="margin-top: 8px;">Vagas de CS:<br><strong>0 / 2</strong> ❌</li>
+                                    <li style="margin-top: 8px;">Vagas de CS:<br><strong>2 / 2</strong> ✅ <span id="hr-goal4-perc" style="font-weight: 500;"></span></li>
                                 </ul>
                             </div>
                         </div>
@@ -1706,10 +1723,14 @@
                             <h5 class="upgrade-title">Customer<br>Success</h5>
                             <div class="upgrade-challenge" style="padding: 0;">
                                 <ul class="upgrade-goal-list">
-                                    <li>Planos Convertidos:<br><strong>0 / 10</strong> ❌</li>
+                                    <li>Planos Convertidos:<br><strong>2 / 10</strong> ❌ <span id="cs-goal1-perc" style="font-weight: 500;"></span></li>
                                 </ul>
                             </div>
                         </div>
+                    </div>
+                    <div class="upgrade-calculation-explanation">
+                        <p><strong>Como o cálculo é feito?</strong><br>
+                        A barra de progresso geral representa a soma dos 4 departamentos, onde cada um possui um peso de 25%. O progresso de cada departamento é a média do avanço de suas metas individuais. A porcentagem ao lado de cada meta representa sua contribuição para a barra total.</p>
                     </div>
                 </div>
 
@@ -2104,9 +2125,72 @@
                     }, 400); // Increased delay to account for nav and page animation
                 });
             }
+            
+            // --- LÓGICA DA BARRA DE PROGRESSO DE UPGRADE ---
+            function calculateUpgradeProgress() {
+                const goals = {
+                    directSales: [
+                        { current: 4, target: 10 },
+                        { current: 0, target: 1 },
+                        { current: 0, target: 1 }
+                    ],
+                    humanResources: [
+                        { current: 0, target: 8 },
+                        { current: 0, target: 14 },
+                        { current: 0, target: 2 },
+                        { current: 2, target: 2 }
+                    ],
+                    bsa: [
+                        { current: 0, target: 60 },
+                        { current: 0, target: 75 },
+                        { current: 0, target: 50 }
+                    ],
+                    customerSuccess: [
+                        { current: 2, target: 10 }
+                    ]
+                };
+
+                function calculateDeptProgress(deptGoals) {
+                    if (deptGoals.length === 0) return 0;
+                    const progressSum = deptGoals.reduce((sum, goal) => {
+                        return sum + (goal.target > 0 ? (goal.current / goal.target) : 0);
+                    }, 0);
+                    return progressSum / deptGoals.length; // Retorna um ratio (0 a 1)
+                }
+
+                // Calcula a contribuição de cada meta individualmente
+                const dsGoal1Contribution = ( (goals.directSales[0].current / goals.directSales[0].target) / goals.directSales.length ) * 25;
+                const hrGoal4Contribution = ( (goals.humanResources[3].current / goals.humanResources[3].target) / goals.humanResources.length ) * 25;
+                const csGoal1Contribution = ( (goals.customerSuccess[0].current / goals.customerSuccess[0].target) / goals.customerSuccess.length ) * 25;
+
+                // Atualiza os spans no HTML
+                document.getElementById('ds-goal1-perc').textContent = `(${dsGoal1Contribution.toFixed(1)}%)`;
+                document.getElementById('hr-goal4-perc').textContent = `(${hrGoal4Contribution.toFixed(1)}%)`;
+                document.getElementById('cs-goal1-perc').textContent = `(${csGoal1Contribution.toFixed(1)}%)`;
+
+
+                const dsProgress = calculateDeptProgress(goals.directSales);
+                const hrProgress = calculateDeptProgress(goals.humanResources);
+                const bsaProgress = calculateDeptProgress(goals.bsa);
+                const csProgress = calculateDeptProgress(goals.customerSuccess);
+
+                // Cada departamento tem um peso de 0.25 (25%)
+                const totalProgressRatio = (dsProgress * 0.25) + (hrProgress * 0.25) + (bsaProgress * 0.25) + (csProgress * 0.25);
+                const totalProgressPercentage = totalProgressRatio * 100;
+
+                const progressBarFill = document.getElementById('upgrade-progress-fill');
+                const progressPercentageText = document.getElementById('upgrade-progress-percentage');
+
+                if (progressBarFill && progressPercentageText) {
+                    progressBarFill.style.width = `${totalProgressPercentage.toFixed(1)}%`;
+                    progressPercentageText.textContent = `${totalProgressPercentage.toFixed(1)}%`;
+                }
+            }
+
+            // Chama a função para definir o progresso inicial
+            calculateUpgradeProgress();
 
         });
     </script>
 </body>
 </html>
-
