@@ -1680,7 +1680,7 @@
                             <h5 class="upgrade-title">Direct<br>Sales</h5>
                             <div class="upgrade-challenge" style="padding: 0;">
                                 <ul class="upgrade-goal-list">
-                                    <li>Planos Multianuais:<br><strong>4 / 10</strong> ❌ <span id="ds-goal1-perc" style="font-weight: 500;"></span></li>
+                                    <li>Planos Multianuais:<br><strong>6 / 10</strong> ❌ <span id="ds-goal1-perc" style="font-weight: 500;"></span></li>
                                     <li style="margin-top: 8px;">MRR & NRR de Outubro<br>superar os de Setembro:<br><strong>0 / 1 ❌</strong></li>
                                     <li style="margin-top: 8px;">MRR & NRR de Novembro<br>superar os de Outubro:<br><strong>0 / 1 ❌</strong></li>
                                 </ul>
@@ -1695,7 +1695,7 @@
                             <div class="upgrade-challenge" style="padding: 0;">
                                 <ul class="upgrade-goal-list">
                                     <li>Vagas de BSA's:<br><strong>0 / 8</strong> ❌</li>
-                                    <li style="margin-top: 8px;">Vagas de Direct Sales:<br><strong>0 / 8</strong> ❌</li>
+                                    <li style="margin-top: 8px;">Vagas de Direct Sales:<br><strong>0 / 14</strong> ❌</li>
                                     <li style="margin-top: 8px;">Vagas de Financeiro:<br><strong>0 / 2</strong> ❌</li>
                                     <li style="margin-top: 8px;">Vagas de CS:<br><strong>2 / 2</strong> ✅ <span id="hr-goal4-perc" style="font-weight: 500;"></span></li>
                                 </ul>
@@ -1709,9 +1709,9 @@
                             <h5 class="upgrade-title">Business Systems Analyst</h5>
                             <div class="upgrade-challenge" style="padding: 0;">
                                 <ul class="upgrade-goal-list" style="line-height: 1.8;">
-                                    <li>Média de Billable:<br><strong>0% / 60% ❌</strong></li>
-                                    <li style="margin-top: 8px;">Projetos com Go Lives:<br><strong>0% / 75% ❌</strong></li>
-                                    <li style="margin-top: 8px;">Conversão de Pré vendas +<br>Buddy:<br><strong>0% / 50% ❌</strong></li>
+                                    <li>Média de Billable:<br><strong>50% / 60%</strong> ❌ <span id="bsa-goal1-perc" style="font-weight: 500;"></span></li>
+                                    <li style="margin-top: 8px;">Projetos com Go Lives:<br><strong>22,5% / 75%</strong> ❌ <span id="bsa-goal2-perc" style="font-weight: 500;"></span></li>
+                                    <li style="margin-top: 8px;">Conversão de Pré vendas +<br>Buddy:<br><strong>5% / 50%</strong> ❌ <span id="bsa-goal3-perc" style="font-weight: 500;"></span></li>
                                 </ul>
                             </div>
                         </div>
@@ -1723,7 +1723,7 @@
                             <h5 class="upgrade-title">Customer<br>Success</h5>
                             <div class="upgrade-challenge" style="padding: 0;">
                                 <ul class="upgrade-goal-list">
-                                    <li>Planos Convertidos:<br><strong>2 / 10</strong> ❌ <span id="cs-goal1-perc" style="font-weight: 500;"></span></li>
+                                    <li>Planos Convertidos:<br><strong>3 / 10</strong> ❌ <span id="cs-goal1-perc" style="font-weight: 500;"></span></li>
                                 </ul>
                             </div>
                         </div>
@@ -2130,7 +2130,7 @@
             function calculateUpgradeProgress() {
                 const goals = {
                     directSales: [
-                        { current: 4, target: 10 },
+                        { current: 6, target: 10 },
                         { current: 0, target: 1 },
                         { current: 0, target: 1 }
                     ],
@@ -2141,12 +2141,12 @@
                         { current: 2, target: 2 }
                     ],
                     bsa: [
-                        { current: 0, target: 60 },
-                        { current: 0, target: 75 },
-                        { current: 0, target: 50 }
+                        { current: 50, target: 60 },
+                        { current: 22.5, target: 75 },
+                        { current: 5, target: 50 }
                     ],
                     customerSuccess: [
-                        { current: 2, target: 10 }
+                        { current: 3, target: 10 }
                     ]
                 };
 
@@ -2161,11 +2161,17 @@
                 // Calcula a contribuição de cada meta individualmente
                 const dsGoal1Contribution = ( (goals.directSales[0].current / goals.directSales[0].target) / goals.directSales.length ) * 25;
                 const hrGoal4Contribution = ( (goals.humanResources[3].current / goals.humanResources[3].target) / goals.humanResources.length ) * 25;
+                const bsaGoal1Contribution = ( (goals.bsa[0].current / goals.bsa[0].target) / goals.bsa.length ) * 25;
+                const bsaGoal2Contribution = ( (goals.bsa[1].current / goals.bsa[1].target) / goals.bsa.length ) * 25;
+                const bsaGoal3Contribution = ( (goals.bsa[2].current / goals.bsa[2].target) / goals.bsa.length ) * 25;
                 const csGoal1Contribution = ( (goals.customerSuccess[0].current / goals.customerSuccess[0].target) / goals.customerSuccess.length ) * 25;
 
                 // Atualiza os spans no HTML
                 document.getElementById('ds-goal1-perc').textContent = `(${dsGoal1Contribution.toFixed(1)}%)`;
                 document.getElementById('hr-goal4-perc').textContent = `(${hrGoal4Contribution.toFixed(1)}%)`;
+                document.getElementById('bsa-goal1-perc').textContent = `(${bsaGoal1Contribution.toFixed(1)}%)`;
+                document.getElementById('bsa-goal2-perc').textContent = `(${bsaGoal2Contribution.toFixed(1)}%)`;
+                document.getElementById('bsa-goal3-perc').textContent = `(${bsaGoal3Contribution.toFixed(1)}%)`;
                 document.getElementById('cs-goal1-perc').textContent = `(${csGoal1Contribution.toFixed(1)}%)`;
 
 
