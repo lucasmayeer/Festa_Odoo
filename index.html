@@ -1018,7 +1018,7 @@
             position: relative;
             width: 100%;
             max-width: 600px;
-            margin: 0 auto 20px auto; /* Centralize the container */
+            margin: 0 auto 20px auto; /* Centralize o container */
         }
         .faq-search {
             width: 100%;
@@ -1680,9 +1680,10 @@
                             <h5 class="upgrade-title">Direct<br>Sales</h5>
                             <div class="upgrade-challenge" style="padding: 0;">
                                 <ul class="upgrade-goal-list">
+                                    <!-- Meta ATUALIZADA: 6/10 -->
                                     <li>Planos Multianuais:<br><strong>6 / 10</strong> ❌ <span id="ds-goal1-perc" style="font-weight: 500;"></span></li>
-                                    <li style="margin-top: 8px;">MRR & NRR de Outubro<br>superar os de Setembro:<br><strong>0 / 1 ❌</strong></li>
-                                    <li style="margin-top: 8px;">MRR & NRR de Novembro<br>superar os de Outubro:<br><strong>0 / 1 ❌</strong></li>
+                                    <li style="margin-top: 8px;">MRR & NRR de Outubro<br>superar os de Setembro:<br><strong>1 / 1</strong> ✅ <span id="ds-goal2-perc" style="font-weight: 500;"></span></li>
+                                    <li style="margin-top: 8px;">MRR & NRR de Novembro<br>superar os de Outubro:<br><strong>0 / 1</strong> ❌ <span id="ds-goal3-perc" style="font-weight: 500;"></span></li>
                                 </ul>
                             </div>
                         </div>
@@ -1694,9 +1695,13 @@
                             <h5 class="upgrade-title">Human<br>Resources</h5>
                             <div class="upgrade-challenge" style="padding: 0;">
                                 <ul class="upgrade-goal-list">
-                                    <li>Vagas de BSA's:<br><strong>0 / 8</strong> ❌</li>
-                                    <li style="margin-top: 8px;">Vagas de Direct Sales:<br><strong>0 / 14</strong> ❌</li>
-                                    <li style="margin-top: 8px;">Vagas de Financeiro:<br><strong>0 / 2</strong> ❌</li>
+                                    <!-- Meta mantida: 4/8 -->
+                                    <li>Vagas de BSA's:<br><strong>4 / 8</strong> ❌ <span id="hr-goal1-perc" style="font-weight: 500;"></span></li>
+                                    <!-- Meta mantida: 5/10 -->
+                                    <li style="margin-top: 8px;">Vagas de Direct Sales:<br><strong>5 / 10</strong> ❌ <span id="hr-goal2-perc" style="font-weight: 500;"></span></li>
+                                    <!-- Meta mantida: 1/2 -->
+                                    <li style="margin-top: 8px;">Vagas de Financeiro:<br><strong>1 / 2</strong> ❌ <span id="hr-goal3-perc" style="font-weight: 500;"></span></li>
+                                    <!-- Meta mantida: 2/2 -->
                                     <li style="margin-top: 8px;">Vagas de CS:<br><strong>2 / 2</strong> ✅ <span id="hr-goal4-perc" style="font-weight: 500;"></span></li>
                                 </ul>
                             </div>
@@ -1709,9 +1714,12 @@
                             <h5 class="upgrade-title">Business Systems Analyst</h5>
                             <div class="upgrade-challenge" style="padding: 0;">
                                 <ul class="upgrade-goal-list" style="line-height: 1.8;">
-                                    <li>Média de Billable:<br><strong>50% / 60%</strong> ❌ <span id="bsa-goal1-perc" style="font-weight: 500;"></span></li>
-                                    <li style="margin-top: 8px;">Projetos com Go Lives:<br><strong>22,5% / 75%</strong> ❌ <span id="bsa-goal2-perc" style="font-weight: 500;"></span></li>
-                                    <li style="margin-top: 8px;">Conversão de Pré vendas +<br>Buddy:<br><strong>5% / 50%</strong> ❌ <span id="bsa-goal3-perc" style="font-weight: 500;"></span></li>
+                                    <!-- Meta mantida: 55%/60% -->
+                                    <li>Média de Billable:<br><strong>55% / 60%</strong> ❌ <span id="bsa-goal1-perc" style="font-weight: 500;"></span></li>
+                                    <!-- Meta mantida: 45%/75% -->
+                                    <li style="margin-top: 8px;">Projetos com Go Lives:<br><strong>45% / 75%</strong> ❌ <span id="bsa-goal2-perc" style="font-weight: 500;"></span></li>
+                                    <!-- Meta mantida: 15%/50% -->
+                                    <li style="margin-top: 8px;">Conversão de Pré vendas +<br>Buddy:<br><strong>15% / 50%</strong> ❌ <span id="bsa-goal3-perc" style="font-weight: 500;"></span></li>
                                 </ul>
                             </div>
                         </div>
@@ -1723,7 +1731,8 @@
                             <h5 class="upgrade-title">Customer<br>Success</h5>
                             <div class="upgrade-challenge" style="padding: 0;">
                                 <ul class="upgrade-goal-list">
-                                    <li>Planos Convertidos:<br><strong>3 / 10</strong> ❌ <span id="cs-goal1-perc" style="font-weight: 500;"></span></li>
+                                    <!-- Meta mantida: 8/10 -->
+                                    <li>Planos Convertidos:<br><strong>8 / 10</strong> ❌ <span id="cs-goal1-perc" style="font-weight: 500;"></span></li>
                                 </ul>
                             </div>
                         </div>
@@ -2126,30 +2135,43 @@
                 });
             }
             
-            // --- LÓGICA DA BARRA DE PROGRESSO DE UPGRADE ---
+            // --- LÓGICA DA BARRA DE PROGRESO DE UPGRADE ---
             function calculateUpgradeProgress() {
+                // Metas ATUALIZADAS
                 const goals = {
                     directSales: [
-                        { current: 6, target: 10 },
-                        { current: 0, target: 1 },
-                        { current: 0, target: 1 }
+                        // Meta 1: Planos Multianuais (ATUALIZADO: 10/10 -> 6/10)
+                        { current: 6, target: 10, id: 'ds-goal1-perc' }, 
+                        // Meta 2: MRR & NRR Outubro (Mantido 1/1)
+                        { current: 1, target: 1, id: 'ds-goal2-perc' },
+                        // Meta 3: MRR & NRR Novembro (Mantido 0/1)
+                        { current: 0, target: 1, id: 'ds-goal3-perc' }
                     ],
                     humanResources: [
-                        { current: 0, target: 8 },
-                        { current: 0, target: 14 },
-                        { current: 0, target: 2 },
-                        { current: 2, target: 2 }
+                        // Meta 1: Vagas de BSA's (Mantido 4/8)
+                        { current: 4, target: 8, id: 'hr-goal1-perc' },
+                        // Meta 2: Vagas de Direct Sales (Mantido 5/10)
+                        { current: 5, target: 10, id: 'hr-goal2-perc' },
+                        // Meta 3: Vagas de Financeiro (Mantido 1/2)
+                        { current: 1, target: 2, id: 'hr-goal3-perc' },
+                        // Meta 4: Vagas de CS (Mantido 2/2)
+                        { current: 2, target: 2, id: 'hr-goal4-perc' }
                     ],
                     bsa: [
-                        { current: 50, target: 60 },
-                        { current: 22.5, target: 75 },
-                        { current: 5, target: 50 }
+                        // Meta 1: Média de Billable (Mantido 55/60)
+                        { current: 55, target: 60, id: 'bsa-goal1-perc' },
+                        // Meta 2: Projetos com Go Lives (Mantido 45/75)
+                        { current: 45, target: 75, id: 'bsa-goal2-perc' },
+                        // Meta 3: Conversão de Pré vendas + Buddy (Mantido 15/50)
+                        { current: 15, target: 50, id: 'bsa-goal3-perc' }
                     ],
                     customerSuccess: [
-                        { current: 3, target: 10 }
+                        // Meta 1: Planos Convertidos (Mantido 8/10)
+                        { current: 8, target: 10, id: 'cs-goal1-perc' }
                     ]
                 };
 
+                // Lógica de cálculo do progresso do departamento
                 function calculateDeptProgress(deptGoals) {
                     if (deptGoals.length === 0) return 0;
                     const progressSum = deptGoals.reduce((sum, goal) => {
@@ -2158,38 +2180,57 @@
                     return progressSum / deptGoals.length; // Retorna um ratio (0 a 1)
                 }
 
-                // Calcula a contribuição de cada meta individualmente
-                const dsGoal1Contribution = ( (goals.directSales[0].current / goals.directSales[0].target) / goals.directSales.length ) * 25;
-                const hrGoal4Contribution = ( (goals.humanResources[3].current / goals.humanResources[3].target) / goals.humanResources.length ) * 25;
-                const bsaGoal1Contribution = ( (goals.bsa[0].current / goals.bsa[0].target) / goals.bsa.length ) * 25;
-                const bsaGoal2Contribution = ( (goals.bsa[1].current / goals.bsa[1].target) / goals.bsa.length ) * 25;
-                const bsaGoal3Contribution = ( (goals.bsa[2].current / goals.bsa[2].target) / goals.bsa.length ) * 25;
-                const csGoal1Contribution = ( (goals.customerSuccess[0].current / goals.customerSuccess[0].target) / goals.customerSuccess.length ) * 25;
+                let totalProgressRatio = 0;
+                
+                // Itera sobre cada departamento para calcular progresso e atualizar a porcentagem de contribuição
+                for (const deptKey in goals) {
+                    const deptGoals = goals[deptKey];
+                    const deptProgressRatio = calculateDeptProgress(deptGoals);
+                    // const deptContribution = deptProgressRatio * 25; // Peso de 25% para cada departamento
+                    totalProgressRatio += deptProgressRatio * 0.25;
 
-                // Atualiza os spans no HTML
-                document.getElementById('ds-goal1-perc').textContent = `(${dsGoal1Contribution.toFixed(1)}%)`;
-                document.getElementById('hr-goal4-perc').textContent = `(${hrGoal4Contribution.toFixed(1)}%)`;
-                document.getElementById('bsa-goal1-perc').textContent = `(${bsaGoal1Contribution.toFixed(1)}%)`;
-                document.getElementById('bsa-goal2-perc').textContent = `(${bsaGoal2Contribution.toFixed(1)}%)`;
-                document.getElementById('bsa-goal3-perc').textContent = `(${bsaGoal3Contribution.toFixed(1)}%)`;
-                document.getElementById('cs-goal1-perc').textContent = `(${csGoal1Contribution.toFixed(1)}%)`;
+                    // Itera sobre as metas do departamento para calcular a contribuição individual de cada meta
+                    deptGoals.forEach(goal => {
+                        const individualGoalRatio = goal.target > 0 ? (goal.current / goal.target) : 0;
+                        // A contribuição individual é a proporção da meta * (25% / número total de metas do departamento)
+                        const individualGoalContribution = individualGoalRatio * (25 / deptGoals.length);
+                        
+                        const element = document.getElementById(goal.id);
+                        if (element) {
+                            element.textContent = `(${individualGoalContribution.toFixed(1)}%)`;
+                        }
+                    });
 
+                    // Atualiza status e estilo do item de upgrade
+                    const itemElement = document.querySelector(`#presidents-club .upgrade-item:nth-child(${['directSales', 'humanResources', 'bsa', 'customerSuccess'].indexOf(deptKey) + 1})`);
+                    
+                    if (itemElement) {
+                        const icon = itemElement.querySelector('.upgrade-status-icon');
+                        const statusText = itemElement.querySelector('.upgrade-status-text');
 
-                const dsProgress = calculateDeptProgress(goals.directSales);
-                const hrProgress = calculateDeptProgress(goals.humanResources);
-                const bsaProgress = calculateDeptProgress(goals.bsa);
-                const csProgress = calculateDeptProgress(goals.customerSuccess);
-
-                // Cada departamento tem um peso de 0.25 (25%)
-                const totalProgressRatio = (dsProgress * 0.25) + (hrProgress * 0.25) + (bsaProgress * 0.25) + (csProgress * 0.25);
+                        // O departamento é liberado se a razão de progresso for >= 1 (100%)
+                        if (deptProgressRatio >= 1) {
+                             itemElement.classList.add('unlocked');
+                             icon.textContent = '✅';
+                             statusText.textContent = 'Upgrade Liberado';
+                        } else {
+                             itemElement.classList.remove('unlocked');
+                             icon.textContent = '🔒';
+                             statusText.textContent = 'Bloqueado';
+                        }
+                    }
+                }
+                
                 const totalProgressPercentage = totalProgressRatio * 100;
 
                 const progressBarFill = document.getElementById('upgrade-progress-fill');
                 const progressPercentageText = document.getElementById('upgrade-progress-percentage');
 
                 if (progressBarFill && progressPercentageText) {
-                    progressBarFill.style.width = `${totalProgressPercentage.toFixed(1)}%`;
-                    progressPercentageText.textContent = `${totalProgressPercentage.toFixed(1)}%`;
+                    // Limita a 100% para evitar overflow
+                    const finalPercentage = Math.min(totalProgressPercentage, 100); 
+                    progressBarFill.style.width = `${finalPercentage.toFixed(1)}%`;
+                    progressPercentageText.textContent = `${finalPercentage.toFixed(1)}%`;
                 }
             }
 
