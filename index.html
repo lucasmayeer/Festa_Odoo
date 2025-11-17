@@ -82,7 +82,6 @@
             height: 100%;
             opacity: 0.03;
             z-index: 2;
-            animation: noise 0.7s infinite;
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><defs><filter id="noise"><feTurbulence baseFrequency="0.9"/></filter></defs><rect width="100%" height="100%" filter="url(%23noise)"/></svg>');
             pointer-events: none;
         }
@@ -162,7 +161,7 @@
             display: flex;
         }
 
-        #cronometro, #informacoes-gerais, #presidents-club {
+        #cronometro, #informacoes-gerais, #cardapio, #presidents-club {
             min-height: calc(100vh - 200px);
         }
 
@@ -193,12 +192,15 @@
         .separator { font-size: 3em; color: white; animation: blink 1s infinite; margin: 0 10px; display: flex; align-items: center; padding-bottom: 30px; }
 
         /* --- ESTILOS PARA SEÇÃO DE INFORMAÇÕES (SEM CAIXA) --- */
-        #informacoes-gerais {
+        #informacoes-gerais, #cardapio {
             background: none;
             backdrop-filter: none;
             border-radius: 0;
             padding: 40px 0;
             align-items: flex-start;
+        }
+        #cardapio {
+            align-items: center;
         }
 
         .info-topic {
@@ -379,7 +381,7 @@
         .video-container {
             position: relative;
             width: 100%;
-            max-width: 400px; /* Reduzido para melhor simetria com vídeo vertical */
+            max-width: 900px; 
             margin: 0 auto 40px auto;
             padding-bottom: 56.25%;
             height: 0;
@@ -504,6 +506,118 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
         }
+        
+        /* ESTILOS DO CARDÁPIO COM LAYOUT DE ABAS (INÍCIO DA NOVA SEÇÃO) */
+        .menu-tabs-container {
+            width: 100%;
+            overflow-x: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .menu-tabs-container::-webkit-scrollbar {
+            display: none;
+        }
+        .menu-tabs {
+            display: flex;
+            /* CORREÇÃO APLICADA AQUI: forçar início e nowrap para rolar */
+            justify-content: flex-start;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 30px;
+            flex-wrap: nowrap; /* FORÇA UMA ÚNICA LINHA */
+        }
+        .menu-tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 500;
+            color: rgba(255,255,255,0.7);
+            border: none;
+            background: none;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+        }
+        .menu-tab::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #E4A900;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        .menu-tab.active {
+            color: white;
+        }
+        .menu-tab.active::after {
+            transform: scaleX(1);
+        }
+        
+        .menu-content-area {
+            padding: 30px 0;
+            min-height: 300px;
+            text-align: center;
+        }
+        .menu-tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .menu-tab-content.active {
+            display: block;
+        }
+        
+        .menu-description {
+            font-style: italic;
+            opacity: 0.8;
+            margin-bottom: 10px; 
+            font-size: 1.1em;
+        }
+
+        /* NOVO ESTILO PARA DESTAQUE DA REVELAÇÃO */
+        .reveal-status {
+            font-weight: 700;
+            font-size: 1.1em;
+            color: #E4A900; 
+            margin-bottom: 25px; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: pulse-warning 2s infinite ease-in-out;
+        }
+        
+        .menu-buttons-container {
+            margin: 25px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .menu-buttons-container .map-button {
+            width: 320px;
+            animation: pulse-button 3s infinite ease-in-out;
+            cursor: default;
+        }
+        
+        .menu-buttons-container .map-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transform: none;
+        }
+        
+        /* NOVO ESTILO PARA BOTÕES MISTERIOSOS */
+        .mystery-blur {
+            filter: blur(5px);
+            color: rgba(255, 255, 255, 0.05) !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+            background: rgba(0, 0, 0, 0.1) !important;
+            pointer-events: none;
+            transition: filter 0.8s ease-out;
+        }
+        
+        /* FIM DOS ESTILOS DO CARDÁPIO */
         
         .typing-subtitle {
             border-right: 3px solid rgba(255, 255, 255, 0.75);
@@ -848,7 +962,6 @@
             font-size: 1em;
             font-weight: 400;
             color: #E4A900;
-            margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -1018,7 +1131,7 @@
             position: relative;
             width: 100%;
             max-width: 600px;
-            margin: 0 auto 20px auto; /* Centralize o container */
+            margin: 0 auto 20px auto; /* Centralize the container */
         }
         .faq-search {
             width: 100%;
@@ -1252,7 +1365,7 @@
             }
 
             /* Reduz a altura mínima para não criar espaços vazios desnecessários */
-            .page-section, #cronometro, #informacoes-gerais, #presidents-club {
+            .page-section, #cronometro, #informacoes-gerais, #cardapio, #presidents-club {
                 min-height: auto;
                 padding-top: 20px;
                 padding-bottom: 20px;
@@ -1341,22 +1454,16 @@
                 max-width: 300px;
             }
 
-            .upgrade-items-grid {
-                flex-direction: column;
-                align-items: center;
+            .menu-tabs {
+                justify-content: flex-start; /* Permite scroll horizontal nas abas do menu */
             }
-            .upgrade-item {
-                max-width: 300px;
+            .menu-tab {
+                font-size: 1em;
+                padding: 12px 20px;
             }
-            
-            .prizes-grid {
-                flex-direction: column;
-                align-items: center;
-                gap: 30px;
-            }
-            .prize-card {
+
+            .menu-buttons-container .map-button {
                 width: 100%;
-                max-width: 350px;
             }
         }
         
@@ -1455,6 +1562,7 @@
             <a href="#" class="nav-item active" data-page="cronometro">Cronômetro</a>
             <a href="#" class="nav-item" data-page="informacoes">Save The Date</a>
             <a href="#" class="nav-item" data-page="sobre-o-evento">Sobre o Evento</a>
+            <a href="#" class="nav-item" data-page="cardapio">Cardápio</a> <!-- NOVO LINK ADICIONADO -->
             <a href="#" class="nav-item" data-page="presidents-club">President's Club</a>
         </nav>
     </header>
@@ -1623,6 +1731,88 @@
 
         </section>
         
+        <!-- SEÇÃO 4: CARDÁPIO (INCLUÍDA) -->
+        <section id="cardapio" class="page-section">
+            <div class="info-topic">
+                <h3>Cardápio do Evento</h3>
+                <div class="menu-tabs-container">
+                    <div class="menu-tabs">
+                        <button class="menu-tab active" data-tab="antepastos">Mesa de Antepastos</button>
+                        <button class="menu-tab" data-tab="finger-food">Finger Food & Sobremesa</button>
+                        <button class="menu-tab" data-tab="lanche">Lanche da Madrugada</button>
+                        <button class="menu-tab" data-tab="soft-drinks">Soft Drinks</button> <!-- NOVA ABA 1 -->
+                        <button class="menu-tab" data-tab="drinks-cervejas">Drinks & Cervejas</button> <!-- NOVA ABA 2 -->
+                    </div>
+                </div>
+                <div class="menu-content-area">
+                    <!-- Conteúdo Antepastos -->
+                    <div id="antepastos-content" class="menu-tab-content active">
+                        <h4 class="typing-subtitle" data-text="Mesa de Antepastos" style="font-size: 1.5em; font-weight: 500; margin-bottom: 20px; display: inline-block; vertical-align: top; min-height: 27px;"></h4>
+                        <p class="menu-description">A Mesa de Antepastos vai ficar disposta o evento todo para consumo!</p>
+                        <div class="reveal-status">4/4 itens revelados</div>
+                        <div class="menu-buttons-container">
+                            <div class="map-button">Pães artesanais e focaccias</div>
+                            <div class="map-button">Pastas & Patês Variados</div>
+                            <div class="map-button">Conservas Selecionadas</div>
+                            <div class="map-button">Embutidos & Frios</div>
+                        </div>
+                    </div>
+                    <!-- Conteúdo Finger Food & Sobremesa -->
+                    <div id="finger-food-content" class="menu-tab-content">
+                        <h4 class="typing-subtitle" data-text="Finger Food & Sobremesa" style="font-size: 1.5em; font-weight: 500; margin-bottom: 20px; display: inline-block; vertical-align: top; min-height: 27px;"></h4>
+                        <p class="menu-description">O Cardápio de Finger Food e Sobremesa serão circulantes com 2 passagens ao longo do evento.</p>
+                        <div class="reveal-status">2/5 itens revelados</div>
+                        <div class="menu-buttons-container">
+                            <div class="map-button">Mini Choripan</div>
+                            <div class="map-button">Frango à Paris</div>
+                            <div class="map-button mystery-blur">não tem nada aqui, mas boa tentativa!</div>
+                            <div class="map-button mystery-blur">não tem nada aqui, mas boa tentativa!</div>
+                            <div class="map-button mystery-blur">não tem nada aqui, mas boa tentativa!</div>
+                        </div>
+                    </div>
+                    <!-- Conteúdo Lanche da Madrugada -->
+                    <div id="lanche-content" class="menu-tab-content">
+                        <h4 class="typing-subtitle" data-text="Lanche da Madrugada" style="font-size: 1.5em; font-weight: 500; margin-bottom: 20px; display: inline-block; vertical-align: top; min-height: 27px;"></h4>
+                        <p class="menu-description">Será servido a partir de 00:00 e ficará disponível até o final do Evento.</p>
+                        <div class="reveal-status">2/2 itens revelados</div>
+                        <div class="menu-buttons-container">
+                            <div class="map-button">Cone de Batata Rústica com Cheddar & Bacon</div>
+                            <div class="map-button">Mini Choripan</div>
+                        </div>
+                    </div>
+                    
+                    <!-- NOVO CONTEÚDO: SOFT DRINKS (SEM BLUR) -->
+                    <div id="soft-drinks-content" class="menu-tab-content">
+                        <h4 class="typing-subtitle" data-text="Soft Drinks" style="font-size: 1.5em; font-weight: 500; margin-bottom: 20px; display: inline-block; vertical-align: top; min-height: 27px;"></h4>
+                        <p class="menu-description">Toda a nossa seleção de bebidas não alcoólicas já está liberada!</p>
+                        <div class="reveal-status">3/3 itens revelados</div>
+                        <div class="menu-buttons-container">
+                            <div class="map-button">Água com & sem gás</div>
+                            <div class="map-button">Coca-Cola (Normal & Zero)</div>
+                            <div class="map-button">Guaraná (Normal & Zero)</div>
+                        </div>
+                    </div>
+
+                    <!-- NOVO CONTEÚDO: DRINKS & CERVEJAS (COM BLUR) -->
+                    <div id="drinks-cervejas-content" class="menu-tab-content">
+                        <h4 class="typing-subtitle" data-text="Drinks & Cervejas" style="font-size: 1.5em; font-weight: 500; margin-bottom: 20px; display: inline-block; vertical-align: top; min-height: 27px;"></h4>
+                        <p class="menu-description">Aguarde a revelação completa para descobrir a nossa carta de drinks e a seleção de cervejas/chopp!</p>
+                        <div class="reveal-status">3/7 itens revelados</div>
+                        <div class="menu-buttons-container">
+                            <div class="map-button">Chope Pilsen</div>
+                            <div class="map-button">Moscow Mule</div>
+                            <div class="map-button">Caipirinhas</div>
+                            <div class="map-button mystery-blur">não tem nada aqui, mas boa tentativa!</div>
+                            <div class="map-button mystery-blur">não tem nada aqui, mas boa tentativa!</div>
+                            <div class="map-button mystery-blur">não tem nada aqui, mas boa tentativa!</div>
+                            <div class="map-button mystery-blur">não tem nada aqui, mas boa tentativa!</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
         <!-- SEÇÃO 5: PRESIDENT'S CLUB -->
         <section id="presidents-club" class="page-section" style="justify-content: flex-start; padding-top: 8vh;">
             <div class="info-topic">
@@ -1800,6 +1990,7 @@
                         'cronometro': 'cronometro',
                         'informacoes': 'informacoes',
                         'sobre-o-evento': 'sobre-o-evento',
+                        'cardapio': 'cardapio', // NOVO MAPPING ADICIONADO
                         'presidents-club': 'presidents-club'
                     };
 
@@ -1808,6 +1999,27 @@
                         const targetPage = document.getElementById(targetPageId);
                         if (targetPage) {
                            targetPage.classList.add('active');
+                           
+                            // Se for a seção do cardápio, inicia o efeito de digitação da aba ativa
+                            if (targetPageId === 'cardapio') {
+                                // Encontra a aba que está ativa
+                                let activeTab = document.querySelector('.menu-tabs .menu-tab.active');
+                                if (!activeTab) {
+                                    // Se nenhuma estiver ativa, define a primeira como ativa (Mesa de Antepastos)
+                                    activeTab = document.querySelector('.menu-tabs .menu-tab[data-tab="antepastos"]');
+                                    if (activeTab) activeTab.classList.add('active');
+
+                                    // Ativa o conteúdo correspondente
+                                    const initialContent = document.getElementById('antepastos-content');
+                                    if (initialContent) initialContent.classList.add('active');
+                                }
+
+                                if (activeTab) {
+                                    const contentId = activeTab.dataset.tab + '-content';
+                                    const typingElement = document.getElementById(contentId).querySelector('.typing-subtitle');
+                                    startTypingEffect(typingElement);
+                                }
+                            }
                         }
                     }
                 });
@@ -1945,6 +2157,103 @@
             }, 1500);
 
             animate();
+
+            // --- LÓGICA DO MENU E EFEITO DE DIGITAÇÃO (CARDÁPIO) ---
+            const menuTabs = document.querySelectorAll('.menu-tabs .menu-tab');
+            const menuContents = document.querySelectorAll('.menu-content-area .menu-tab-content');
+            let currentTypingTimeout;
+
+            /**
+             * Inicia o efeito de digitação/apagamento no elemento.
+             * @param {HTMLElement} element O elemento que contém o atributo data-text.
+             */
+            function startTypingEffect(element) {
+                // Apenas inicia se o elemento estiver no conteúdo ativo
+                if (!element || !element.closest('.menu-tab-content.active')) return;
+                
+                if (currentTypingTimeout) {
+                    clearTimeout(currentTypingTimeout);
+                }
+
+                const text = element.getAttribute('data-text');
+                if (!text) return;
+
+                let textIndex = 0;
+                let isDeleting = false;
+                element.textContent = ''; // Limpa o texto inicial
+
+                function typeWriter() {
+                    // Verifica se o elemento ainda é o conteúdo ativo
+                    if (!element.closest('.menu-tab-content.active')) {
+                        // Se não for mais o ativo, para o efeito para evitar poluição
+                        element.textContent = text; 
+                        return; 
+                    }
+                    
+                    element.textContent = text.substring(0, textIndex);
+                    const speed = isDeleting ? 75 : 150;
+                    let pause = speed;
+
+                    if (!isDeleting) {
+                        if (textIndex < text.length) {
+                            textIndex++;
+                        } else {
+                            pause = 2000; // Pausa no final da digitação
+                            isDeleting = true;
+                        }
+                    } else {
+                        if (textIndex > 0) {
+                            textIndex--;
+                        } else {
+                            pause = 500; // Pausa no final da remoção
+                            isDeleting = false;
+                        }
+                    }
+                    
+                    currentTypingTimeout = setTimeout(typeWriter, pause);
+                }
+                typeWriter();
+            }
+
+            // Adiciona listener de clique para as abas
+            menuTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove 'active' de todas as abas e conteúdos
+                    menuTabs.forEach(item => item.classList.remove('active'));
+                    menuContents.forEach(content => content.classList.remove('active'));
+
+                    // Adiciona 'active' na aba e conteúdo selecionados
+                    tab.classList.add('active');
+                    const contentId = tab.dataset.tab + '-content';
+                    const targetContent = document.getElementById(contentId);
+
+                    if (targetContent) {
+                        targetContent.classList.add('active');
+                        // Inicia o efeito de digitação no novo conteúdo
+                        const typingElement = targetContent.querySelector('.typing-subtitle');
+                        startTypingEffect(typingElement);
+                    }
+                });
+            });
+
+            // Se a seção cardápio estiver ativa por padrão, inicia o efeito na primeira aba.
+            const cardapioSection = document.getElementById('cardapio');
+            const initialAntepastosContent = document.getElementById('antepastos-content');
+            if (cardapioSection && cardapioSection.classList.contains('active')) {
+                const initialTypingElement = initialAntepastosContent ? initialAntepastosContent.querySelector('.typing-subtitle') : null;
+                if (initialTypingElement) {
+                    startTypingEffect(initialTypingElement);
+                }
+            }
+
+            // Garante que o conteúdo inicial 'antepastos-content' esteja ativo na carga, 
+            // já que a aba correspondente 'antepastos' está com active
+            if (initialAntepastosContent) {
+                 initialAntepastosContent.classList.add('active');
+            }
+
+            // --- FIM DA LÓGICA DO MENU E EFEITO DE DIGITAÇÃO (CARDÁPIO) ---
+
 
             // --- FAQ ACCORDION, SEARCH, AND PAGINATION ---
             const allFaqs = [
@@ -2115,23 +2424,23 @@
                 floatButton.addEventListener('click', function(e) {
                     e.preventDefault();
 
-                    // Navigate to the "Sobre o Evento" section
+                    // Navega para a seção "Sobre o Evento" (onde o FAQ está)
                     const navLink = document.querySelector('a.nav-item[data-page="sobre-o-evento"]');
                     if (navLink) {
-                        // Close mobile nav if open
+                        // Fecha o menu mobile se estiver aberto
                         if (document.body.classList.contains('nav-open')) {
                             document.body.classList.remove('nav-open');
                         }
                         navLink.click();
                     }
 
-                    // Scroll to the FAQ section after a short delay for the page transition
+                    // Rola até a seção FAQ após a transição da página
                     setTimeout(() => {
                         const faqSection = document.getElementById('faq-anchor');
                         if (faqSection) {
                             faqSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }
-                    }, 400); // Increased delay to account for nav and page animation
+                    }, 400); // Atraso para permitir a animação da mudança de seção
                 });
             }
             
@@ -2148,7 +2457,7 @@
                         { current: 0, target: 1, id: 'ds-goal3-perc' }
                     ],
                     humanResources: [
-                        // Meta 1: Vagas de BSA's (ATUALIZADO: 4/8 -> 5/8)
+                        // Meta 1: Vagas de BSA's (ATUALIZADO: 5/8)
                         { current: 5, target: 8, id: 'hr-goal1-perc' },
                         // Meta 2: Vagas de Direct Sales (Mantido 5/10)
                         { current: 5, target: 10, id: 'hr-goal2-perc' },
@@ -2186,7 +2495,6 @@
                 for (const deptKey in goals) {
                     const deptGoals = goals[deptKey];
                     const deptProgressRatio = calculateDeptProgress(deptGoals);
-                    // const deptContribution = deptProgressRatio * 25; // Peso de 25% para cada departamento
                     totalProgressRatio += deptProgressRatio * 0.25;
 
                     // Itera sobre as metas do departamento para calcular a contribuição individual de cada meta
