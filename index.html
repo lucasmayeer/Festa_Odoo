@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- META TAG DE DESCRIÇÃO PARA SEO -->
-    <meta name="description" content="Contagem regressiva para o grande anúncio da Odoo Brasil. Fique por dentro das novidades, informações do evento e prepare-se para o futuro.">
+    <!-- META TAG DE DESCRIÇÃO PARA SEO --><meta name="description" content="Contagem regressiva para o grande anúncio da Odoo Brasil. Fique por dentro das novidades, informações do evento e prepare-se para o futuro.">
     <title>Anúncio Odoo Brasil</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎉</text></svg>">
     <style>
@@ -492,15 +491,22 @@
             transition: all 0.3s ease;
             background: rgba(255, 255, 255, 0.1);
             text-align: center;
+            pointer-events: none; /* Padrão: não clicável/interativo para itens de menu */
         }
         .map-button:hover {
-            background-color: white;
-            color: #714B67;
-            transform: scale(1.05);
+            background-color: rgba(255, 255, 255, 0.1); /* Mantido para visual */
+            color: white;
+            transform: none;
         }
 
         #confirm-presence-btn {
             animation: breathe 2.5s infinite ease-in-out;
+            pointer-events: auto; /* Deve ser clicável */
+        }
+        #confirm-presence-btn:hover {
+            background-color: white;
+            color: #714B67;
+            transform: scale(1.05);
         }
         @keyframes breathe {
             0%, 100% { transform: scale(1); }
@@ -598,13 +604,6 @@
         .menu-buttons-container .map-button {
             width: 320px;
             animation: pulse-button 3s infinite ease-in-out;
-            cursor: default;
-        }
-        
-        .menu-buttons-container .map-button:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            transform: none;
         }
         
         /* NOVO ESTILO PARA BOTÕES MISTERIOSOS */
@@ -615,6 +614,120 @@
             background: rgba(0, 0, 0, 0.1) !important;
             pointer-events: none;
             transition: filter 0.8s ease-out;
+        }
+        
+        /* NOVO ESTILO PARA BOTÕES BLOQUEADOS COM CADEADO */
+        .locked-item {
+            position: relative;
+            /* Cor mais esmaecida para indicar bloqueio visualmente */
+            background-color: rgba(113, 75, 103, 0.4) !important; 
+            color: rgba(255, 255, 255, 0.6) !important;
+            border-color: rgba(255, 255, 255, 0.3) !important;
+            cursor: default !important; /* Padrão: bloqueado */
+            pointer-events: none; /* Padrão: não interativo */
+        }
+        
+        /* Exceção para os botões clicáveis (Easter Egg) */
+        #cuba-libre-btn, #red-velvet-btn, #aperol-spritz-btn {
+            cursor: pointer !important;
+            pointer-events: auto !important; /* Torna clicável */
+        }
+        #cuba-libre-btn:hover, #red-velvet-btn:hover, #aperol-spritz-btn:hover {
+            transform: scale(1.02); /* Efeito de hover suave */
+            background-color: rgba(113, 75, 103, 0.6) !important;
+        }
+        
+        /* Tooltip Container - REMOVENDO ::before e ::after, pois o JS irá criar a div. */
+        /* Mantendo o placeholder para evitar quebras se o JS falhar (embora não renderize HTML) */
+        .locked-item[data-tooltip]::before,
+        .locked-item[data-tooltip]::after {
+            content: none !important;
+        }
+        
+        /* NOVO ESTILO PARA A CAIXA DE TOOLTIP GERADA POR JS */
+        #custom-tooltip {
+            position: fixed;
+            padding: 15px;
+            border-radius: 12px;
+            background: white; /* Cor branca */
+            color: #714B67; /* Cor do texto Odoo */
+            font-size: 0.9em;
+            font-weight: 400;
+            line-height: 1.4;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 10000; /* Z-index alto para garantir que fique por cima */
+            max-width: 350px;
+            min-width: 280px;
+            text-align: left;
+            pointer-events: none; /* Garante que não interfira no hover do botão */
+            opacity: 0;
+            transition: opacity 0.3s;
+            transform: translate(-50%, -10px); /* Ajuste inicial para flutuar acima */
+        }
+        
+        /* Estilos específicos para o conteúdo HTML injetado no tooltip */
+        #custom-tooltip strong {
+            font-weight: 700;
+            color: #714B67; 
+            display: block; 
+            margin-bottom: 5px;
+        }
+        
+        #custom-tooltip em {
+            font-style: normal;
+            font-weight: 500;
+            color: #E4A900; 
+        }
+
+        #custom-tooltip ul {
+            list-style: disc;
+            padding-left: 20px;
+            margin-top: 5px;
+            color: #714B67;
+            font-size: 0.95em;
+        }
+
+        #custom-tooltip li {
+            margin-bottom: 4px;
+        }
+
+        /* --- ESTILO E ANIMAÇÃO EASTER EGG --- */
+        .rising-element {
+            position: fixed;
+            bottom: -100px; /* Começa abaixo do viewport */
+            color: white; 
+            font-size: 30px; 
+            text-align: center;
+            line-height: 60px; 
+            animation: rise-and-fade 5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            z-index: 100000;
+            pointer-events: none;
+            background: none; 
+            border-radius: 0; 
+            box-shadow: none; 
+        }
+
+        .rising-element.is-image img {
+            width: 60px; 
+            height: auto; 
+            object-fit: contain;
+            /* Garante que a imagem se posicione corretamente dentro do elemento flutuante */
+            display: block;
+        }
+
+        @keyframes rise-and-fade {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-50vh) scale(1.1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120vh) scale(0.8);
+                opacity: 0;
+            }
         }
         
         /* FIM DOS ESTILOS DO CARDÁPIO */
@@ -1131,7 +1244,7 @@
             position: relative;
             width: 100%;
             max-width: 600px;
-            margin: 0 auto 20px auto; /* Centralize the container */
+            margin: 0 auto 20px auto; /* Centralize o container */
         }
         .faq-search {
             width: 100%;
@@ -1297,6 +1410,22 @@
 
         /* Celulares Maiores e Tablets em Retrato (até 768px) */
         @media (max-width: 768px) {
+            /* Fixa a posição do tooltip para funcionar bem em telas menores */
+            #custom-tooltip {
+                max-width: 90vw;
+                transform: translateX(-50%) !important;
+            }
+
+            .locked-item[data-tooltip]::before {
+                /* Ajuste para telas menores: garantir que não saia da tela */
+                max-width: 90vw;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .locked-item[data-tooltip]::after {
+                left: 50%;
+                transform: translate(-50%, 16px);
+            }
             body {
                 /* Melhora a legibilidade em telas menores */
                 -webkit-text-size-adjust: 100%;
@@ -1533,6 +1662,9 @@
     </style>
 </head>
 <body>
+    <!-- ELEMENTO PARA O TOOLTIP PERSONALIZADO (ADICIONADO) -->
+    <div id="custom-tooltip"></div>
+    
     <canvas id="particles-canvas"></canvas>
     <div class="particle particle1"></div>
     <div class="particle particle2"></div>
@@ -1663,13 +1795,13 @@
                         <h4>Playlist Oficial</h4>
                         <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/4QfHbBH7PoL6jEQTngKIb8?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                         <p>Essa playlist vai começar a tocar a partir das 20:00</p>
-                        <a href="https://open.spotify.com/playlist/4QfHbBH7PoL6jEQTngKIb8?si=c2c947a93c724cb3&pt=64ddc9c4bfb2475bf351c94eff1e07ed" target="_blank" class="playlist-button" style="margin-top: 20px;">Adicione suas músicas</a>
+                        <a href="https://open.spotify.com/playlist/4QfHbBH7PoL6jEQTngKIb8?si=c2c947a93c724cb3&pt=64ddc9c4bfb2475bf351c94eff1e07ed" target="_blank" class="playlist-button">Adicione suas músicas</a>
                     </div>
                     <div class="playlist-card">
                         <h4>Funk Edition</h4>
                         <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5QKasOQjG2U8qZqOjSXu4B?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                         <p>Essa playlist vai começar a tocar a partir das 00:00</p>
-                        <a href="https://open.spotify.com/playlist/5QKasOQjG2U8qZqOjSXu4B?si=a8527904eadb4d4c&pt=fb80fe4e91c14d5ffd9c4db0bb965fb6" target="_blank" class="playlist-button" style="margin-top: 20px;">Adicione suas músicas</a>
+                        <a href="https://open.spotify.com/playlist/5QKasOQjG2U8qZqOjSXu4B?si=a8527904eadb4d4c&pt=fb80fe4e91c14d5ffd9c4db0bb965fb6" target="_blank" class="playlist-button">Adicione suas músicas</a>
                     </div>
                 </div>
             </div>
@@ -1703,7 +1835,7 @@
                     <!-- ITENS DE MÚSICA ATUALIZADOS E NOVO HORÁRIO INSERIDO -->
                     <div class="timeline-vertical-event">
                         <span class="timeline-vertical-time">22:00</span>
-                        <p class="timeline-vertical-desc">Odoo Club: Eli & Rhafa</p>
+                        <p class="timeline-vertical-desc">Odoo Club: Eli & André</p>
                     </div>
                     <div class="timeline-vertical-event">
                         <span class="timeline-vertical-time">23:00</span>
@@ -1775,12 +1907,13 @@
                     <div id="finger-food-content" class="menu-tab-content">
                         <h4 class="typing-subtitle" data-text="Finger Food & Sobremesa" style="font-size: 1.5em; font-weight: 500; margin-bottom: 20px; display: inline-block; vertical-align: top; min-height: 27px;"></h4>
                         <p class="menu-description">O Cardápio de Finger Food e Sobremesa serão circulantes com 2 passagens ao longo do evento.</p>
-                        <div class="reveal-status">2/5 itens revelados</div>
+                        <div class="reveal-status">3/5 itens revelados</div>
                         <div class="menu-buttons-container">
                             <div class="map-button">Mini Choripan</div>
                             <div class="map-button">Frango à Paris</div>
-                            <div class="map-button mystery-blur">não tem nada aqui, mas boa tentativa!</div>
-                            <div class="map-button mystery-blur">não tem nada aqui, mas boa tentativa!</div>
+                            <div class="map-button">Mignon ao Molho de Queijo</div>
+                            <div class="map-button">Mini Espeto de Pernil BBQ</div>
+                            <div class="map-button">Brownie Toffee</div>
                             <div class="map-button mystery-blur">não tem nada aqui, mas boa tentativa!</div>
                         </div>
                     </div>
@@ -1807,19 +1940,47 @@
                         </div>
                     </div>
 
-                    <!-- NOVO CONTEÚDO: DRINKS & CERVEJAS (COM BLUR) -->
+                    <!-- NOVO CONTEÚDO: DRINKS & CERVEJAS (COM BLOQUEIO REVERSO E TOOLTIP) -->
                     <div id="drinks-cervejas-content" class="menu-tab-content">
                         <h4 class="typing-subtitle" data-text="Drinks & Cervejas" style="font-size: 1.5em; font-weight: 500; margin-bottom: 20px; display: inline-block; vertical-align: top; min-height: 27px;"></h4>
                         <p class="menu-description">Aguarde a revelação completa para descobrir a nossa carta de drinks e a seleção de cervejas/chopp!</p>
-                        <div class="reveal-status">3/7 itens revelados</div>
+                        <!-- A contagem se mantém em 4/7 revelados (os 4 originais) + 3 recém-liberados/bloqueados -->
+                        <div class="reveal-status">7/7 itens revelados (mas 3 foram bloqueados)</div>
                         <div class="menu-buttons-container">
                             <div class="map-button">Chope Pilsen</div>
                             <div class="map-button">Moscow Mule</div>
                             <div class="map-button">Caipirinhas</div>
-                            <div class="map-button mystery-blur">não tem nada aqui, mas boa tentativa!</div>
-                            <div class="map-button mystery-blur">não tem nada aqui, mas boa tentativa!</div>
-                            <div class="map-button mystery-blur">não tem nada aqui, mas boa tentativa!</div>
-                            <div class="map-button mystery-blur">não tem nada aqui, mas boa tentativa!</div>
+                            <div class="map-button">Gin Tônica</div>
+                            
+                            <!-- Aperol: MRR & NRR de Novembro (DS) + Vagas de Direct Sales e Financeiro (HR) -->
+                            <div class="map-button locked-item" id="aperol-spritz-btn" data-tooltip-html="
+                                <strong>Aperol Spritz:</strong> Aperol, espumante brut e água com gás.<br><br>
+                                <strong>META A SER BATIDA:</strong> 
+                                <ul>
+                                    <li><em>Direct Sales:</em> MRR & NRR de Novembro superar os de Outubro.</li>
+                                    <li><em>Human Resources:</em> Vagas de Direct Sales e Vagas de Financeiro.</li>
+                                </ul>
+                            ">Aperol Spritz 🔒</div>
+
+                            <!-- Red Velvet: CS Planos Convertidos + BSA Média de Billable e Projetos Go Lives -->
+                            <div class="map-button locked-item" id="red-velvet-btn" data-tooltip-html="
+                                <strong>Red Velvet:</strong> (Bebida Autoral) Gin Gordons, purê de framboesa, limão tahiti e Red Bull de Amora.<br><br> 
+                                <strong>META A SER BATIDA:</strong> 
+                                <ul>
+                                    <li><em>Customer Success:</em> Planos Convertidos.</li>
+                                    <li><em>BSA:</em> Média de Billable e Projetos com Go Lives.</li>
+                                </ul>
+                            ">Red Velvet 🔒</div>
+
+                            <!-- Cuba Libre: Easter Egg e Meta -->
+                            <div class="map-button locked-item" id="cuba-libre-btn" data-tooltip-html="
+                                <strong>Cuba Libre:</strong> Bacardi Oro, Coca-Cola e limão tahiti.<br><br> 
+                                <strong>META A SER BATIDA:</strong> 
+                                <ul>
+                                    <li><em>Direct Sales:</em> Planos Multianuais e MRR & NRR de Outubro superar os de Setembro.</li>
+                                </ul>
+                            ">Cuba Libre 🔒</div>
+                            
                         </div>
                     </div>
 
@@ -1964,7 +2125,156 @@
     </a>
 
     <script>
+        // Variável global para o tooltip
+        let customTooltip;
+
+        /**
+         * Inicializa o elemento de tooltip e configura a lógica de hover.
+         */
+        function initializeCustomTooltip() {
+            // Cria o elemento se ele não existir (embora já esteja no HTML agora)
+            customTooltip = document.getElementById('custom-tooltip');
+            if (!customTooltip) return;
+
+            // Altera o seletor para buscar o novo atributo data-tooltip-html
+            const lockedItems = document.querySelectorAll('.map-button.locked-item');
+
+            lockedItems.forEach(item => {
+                // Adiciona o listener de mouseover
+                item.addEventListener('mouseover', (e) => {
+                    // MUDANÇA PRINCIPAL: Agora lendo o atributo data-tooltip-html
+                    const tooltipHtml = item.getAttribute('data-tooltip-html');
+                    if (!tooltipHtml) {
+                        customTooltip.style.opacity = '0';
+                        return;
+                    }
+                    
+                    // 1. Injeta o HTML para renderização
+                    customTooltip.innerHTML = tooltipHtml;
+                    
+                    // 2. Posiciona o tooltip
+                    const rect = item.getBoundingClientRect();
+                    const tooltipHeight = customTooltip.offsetHeight;
+                    const tooltipWidth = customTooltip.offsetWidth;
+                    
+                    // Centraliza horizontalmente
+                    let left = rect.left + rect.width / 2;
+                    
+                    // Posiciona verticalmente acima do botão + um pequeno offset (25px)
+                    let top = rect.top - tooltipHeight - 25; 
+
+                    // Ajuste para não sair da borda esquerda
+                    if (left - tooltipWidth / 2 < 0) {
+                        left = tooltipWidth / 2 + 10; // 10px de margem
+                    }
+                    // Ajuste para não sair da borda direita
+                    if (left + tooltipWidth / 2 > window.innerWidth) {
+                        left = window.innerWidth - tooltipWidth / 2 - 10; // 10px de margem
+                    }
+                    // Ajuste se estiver muito perto do topo (move para baixo se não houver espaço)
+                    if (top < 0) {
+                        top = rect.bottom + 10; 
+                    }
+
+                    // Aplica as posições, ajustando para a centralização CSS
+                    customTooltip.style.left = `${left}px`;
+                    customTooltip.style.top = `${top}px`;
+                    customTooltip.style.transform = 'translateX(-50%)'; // Mantém a centralização CSS
+
+                    // 3. Torna visível
+                    customTooltip.style.opacity = '1';
+                });
+
+                // Ao retirar o mouse (mouseout)
+                item.addEventListener('mouseout', () => {
+                    customTooltip.style.opacity = '0';
+                });
+            });
+        }
+        
+        // --- LÓGICA DO EASTER EGG CUBA LIBRE ---
+        function spawnRisingFaces(count = 25, type = 'mixed') {
+            const faceEmojis = ['🥳', '✨', '🔥', '💖', '😎', '🎉', '💃', '🕺', '🍸', '🍾', '🥂'];
+            const imagePath = 'eegg_cb.png';
+            const screenWidth = window.innerWidth;
+            const elementSize = 60; // Largura/altura base para imagens e emojis
+
+            for (let i = 0; i < count; i++) {
+                let isImage = false;
+                if (type === 'mixed') {
+                    isImage = Math.random() < 0.5; // 50% de chance para Cuba Libre
+                } else if (type === 'emoji') {
+                    isImage = false; // Apenas emojis
+                }
+                
+                const element = document.createElement(isImage ? 'img' : 'span');
+                
+                element.classList.add('rising-element');
+                
+                if (isImage) {
+                    element.src = imagePath;
+                    element.alt = 'Easter Egg Face';
+                    element.classList.add('is-image');
+                    // Define o tamanho da imagem
+                    element.style.width = `${elementSize}px`;
+                    element.style.height = 'auto'; // Mantém proporção
+                } else {
+                    element.textContent = faceEmojis[Math.floor(Math.random() * faceEmojis.length)];
+                    element.style.width = `${elementSize}px`;
+                    element.style.height = `${elementSize}px`;
+                    element.style.lineHeight = `${elementSize}px`;
+                }
+
+                // Posição inicial horizontal aleatória
+                const startX = Math.random() * (screenWidth - elementSize);
+                element.style.left = `${startX}px`;
+
+                // Aplica um pequeno giro aleatório inicial
+                element.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+                // Pequeno atraso para escalonar o efeito
+                element.style.animationDelay = `${i * 0.15}s`;
+                
+                // Remove o elemento após a animação para limpar o DOM
+                element.addEventListener('animationend', () => {
+                    element.remove();
+                });
+
+                document.body.appendChild(element);
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
+            // Inicializa o novo sistema de tooltip
+            initializeCustomTooltip();
+
+            // === EASTER EGG LISTENERS ===
+            const cubaLibreBtn = document.getElementById('cuba-libre-btn');
+            const redVelvetBtn = document.getElementById('red-velvet-btn');
+            const aperolSpritzBtn = document.getElementById('aperol-spritz-btn');
+
+            // Cuba Libre (Misto: Imagem + Emojis)
+            if (cubaLibreBtn) {
+                cubaLibreBtn.addEventListener('click', (e) => {
+                    e.preventDefault(); 
+                    spawnRisingFaces(25, 'mixed'); 
+                });
+            }
+
+            // Red Velvet e Aperol Spritz (Apenas Emojis)
+            if (redVelvetBtn) {
+                redVelvetBtn.addEventListener('click', (e) => {
+                    e.preventDefault(); 
+                    spawnRisingFaces(20, 'emoji');
+                });
+            }
+            if (aperolSpritzBtn) {
+                aperolSpritzBtn.addEventListener('click', (e) => {
+                    e.preventDefault(); 
+                    spawnRisingFaces(20, 'emoji');
+                });
+            }
+            
             // --- LÓGICA DO MENU MOBILE ---
             const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
             const mobileMenuClose = document.querySelector('.mobile-menu-close');
