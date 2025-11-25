@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- META TAG DE DESCRIÇÃO PARA SEO --><meta name="description" content="Contagem regressiva para o grande anúncio da Odoo Brasil. Fique por dentro das novidades, informações do evento e prepare-se para o futuro.">
     <title>Anúncio Odoo Brasil</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎉</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎉</text></svg>"></svg>">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap');
         
@@ -628,11 +628,11 @@
         }
         
         /* Exceção para os botões clicáveis (Easter Egg) */
-        #cuba-libre-btn, #red-velvet-btn, #aperol-spritz-btn {
+        #cuba-libre-btn, #red-velvet-btn, #negroni-btn, #ambar-spritz-btn {
             cursor: pointer !important;
             pointer-events: auto !important; /* Torna clicável */
         }
-        #cuba-libre-btn:hover, #red-velvet-btn:hover, #aperol-spritz-btn:hover {
+        #cuba-libre-btn:hover, #red-velvet-btn:hover, #negroni-btn:hover, #ambar-spritz-btn:hover {
             transform: scale(1.02); /* Efeito de hover suave */
             background-color: rgba(113, 75, 103, 0.6) !important;
         }
@@ -1912,8 +1912,7 @@
                             <div class="map-button">Mini Choripan</div>
                             <div class="map-button">Frango à Paris</div>
                             <div class="map-button">Mignon ao Molho de Queijo</div>
-                            <div class="map-button">Mini Espeto de Pernil BBQ</div>
-                            <div class="map-button">Brownie Toffee</div>
+                            <div class="map-button mystery-blur">não tem nada aqui, mas boa tentativa!</div>
                             <div class="map-button mystery-blur">não tem nada aqui, mas boa tentativa!</div>
                         </div>
                     </div>
@@ -1944,38 +1943,48 @@
                     <div id="drinks-cervejas-content" class="menu-tab-content">
                         <h4 class="typing-subtitle" data-text="Drinks & Cervejas" style="font-size: 1.5em; font-weight: 500; margin-bottom: 20px; display: inline-block; vertical-align: top; min-height: 27px;"></h4>
                         <p class="menu-description">Aguarde a revelação completa para descobrir a nossa carta de drinks e a seleção de cervejas/chopp!</p>
-                        <!-- A contagem se mantém em 4/7 revelados (os 4 originais) + 3 recém-liberados/bloqueados -->
-                        <div class="reveal-status">7/7 itens revelados (mas 3 foram bloqueados)</div>
+                        <!-- A contagem se mantém em 4/7 revelados (os 4 originais) + 4 recém-liberados/bloqueados -->
+                        <div class="reveal-status">8/8 itens revelados (mas 4 foram bloqueados)</div>
                         <div class="menu-buttons-container">
                             <div class="map-button">Chope Pilsen</div>
                             <div class="map-button">Moscow Mule</div>
                             <div class="map-button">Caipirinhas</div>
                             <div class="map-button">Gin Tônica</div>
                             
-                            <!-- Aperol: MRR & NRR de Novembro (DS) + Vagas de Direct Sales e Financeiro (HR) -->
-                            <div class="map-button locked-item" id="aperol-spritz-btn" data-tooltip-html="
-                                <strong>Negroni:</strong> Gin Gordons, Vermouth Rosso e Campari..<br><br>
-                                <strong>META A SER BATIDA:</strong> 
+                            <!-- 1. AMBAR SPRITZ (Novo drink) -->
+                            <div class="map-button locked-item" id="ambar-spritz-btn" data-tooltip-html="
+                                <strong>Ambar Spritz:</strong> Aperol, espumante brut e água com gás.<br><br>
+                                <strong>META A SER BATIDA (INTEGRALMENTE):</strong> 
+                                <ul>
+                                    <li><em>Human Resources:</em> Vagas de BSA's e Vagas de CS.</li>
+                                    <li><em>BSA:</em> Conversão de Pré vendas + Buddy.</li>
+                                </ul>
+                            ">Ambar Spritz 🔒</div>
+
+                            <!-- 2. NEGRONI (Anteriormente Aperol Spritz) -->
+                            <div class="map-button locked-item" id="negroni-btn" data-tooltip-html="
+                                <strong>Negroni:</strong> Gin Gordons, Vermouth Rosso e Campari.<br><br>
+                                <strong>META A SER BATIDA (INTEGRALMENTE):</strong> 
                                 <ul>
                                     <li><em>Direct Sales:</em> MRR & NRR de Novembro superar os de Outubro.</li>
                                     <li><em>Human Resources:</em> Vagas de Direct Sales e Vagas de Financeiro.</li>
                                 </ul>
                             ">Negroni 🔒</div>
 
-                            <!-- Red Velvet: CS Planos Convertidos + BSA Média de Billable e Projetos Go Lives -->
+                            <!-- 3. Red Velvet -->
                             <div class="map-button locked-item" id="red-velvet-btn" data-tooltip-html="
                                 <strong>Red Velvet:</strong> (Bebida Autoral) Gin Gordons, purê de framboesa, limão tahiti e Red Bull de Amora.<br><br> 
-                                <strong>META A SER BATIDA:</strong> 
+                                <strong>META A SER BATIDA (INTEGRALMENTE):</strong> 
                                 <ul>
                                     <li><em>Customer Success:</em> Planos Convertidos.</li>
                                     <li><em>BSA:</em> Média de Billable e Projetos com Go Lives.</li>
                                 </ul>
                             ">Red Velvet 🔒</div>
 
-                            <!-- Cuba Libre: Easter Egg e Meta -->
+                            <!-- 4. Cuba Libre (Easter Egg) -->
                             <div class="map-button locked-item" id="cuba-libre-btn" data-tooltip-html="
                                 <strong>Cuba Libre:</strong> Bacardi Oro, Coca-Cola e limão tahiti.<br><br> 
-                                <strong>META A SER BATIDA:</strong> 
+                                <strong>META A SER BATIDA (INTEGRALMENTE):</strong> 
                                 <ul>
                                     <li><em>Direct Sales:</em> Planos Multianuais e MRR & NRR de Outubro superar os de Setembro.</li>
                                 </ul>
@@ -2045,9 +2054,11 @@
                             <h5 class="upgrade-title">Direct<br>Sales</h5>
                             <div class="upgrade-challenge" style="padding: 0;">
                                 <ul class="upgrade-goal-list">
-                                    <!-- Meta mantida: 6/10 -->
+                                    <!-- Meta 1: Planos Multianuais (Usada no Cuba Libre) -->
                                     <li>Planos Multianuais:<br><strong>6 / 10</strong> ❌ <span id="ds-goal1-perc" style="font-weight: 500;"></span></li>
+                                    <!-- Meta 2: MRR & NRR Outubro (Usada no Cuba Libre) -->
                                     <li style="margin-top: 8px;">MRR & NRR de Outubro<br>superar os de Setembro:<br><strong>1 / 1</strong> ✅ <span id="ds-goal2-perc" style="font-weight: 500;"></span></li>
+                                    <!-- Meta 3: MRR & NRR Novembro (Usada no Negroni) -->
                                     <li style="margin-top: 8px;">MRR & NRR de Novembro<br>superar os de Outubro:<br><strong>0 / 1</strong> ❌ <span id="ds-goal3-perc" style="font-weight: 500;"></span></li>
                                 </ul>
                             </div>
@@ -2060,13 +2071,13 @@
                             <h5 class="upgrade-title">Human<br>Resources</h5>
                             <div class="upgrade-challenge" style="padding: 0;">
                                 <ul class="upgrade-goal-list">
-                                    <!-- Meta ATUALIZADA: 5/8 -->
+                                    <!-- Meta 1: Vagas de BSA's (Usada no Ambar Spritz) -->
                                     <li>Vagas de BSA's:<br><strong>5 / 8</strong> ❌ <span id="hr-goal1-perc" style="font-weight: 500;"></span></li>
-                                    <!-- Meta mantida: 5/10 -->
+                                    <!-- Meta 2: Vagas de Direct Sales (Usada no Negroni) -->
                                     <li style="margin-top: 8px;">Vagas de Direct Sales:<br><strong>5 / 10</strong> ❌ <span id="hr-goal2-perc" style="font-weight: 500;"></span></li>
-                                    <!-- Meta mantida: 1/2 -->
+                                    <!-- Meta 3: Vagas de Financeiro (Usada no Negroni) -->
                                     <li style="margin-top: 8px;">Vagas de Financeiro:<br><strong>1 / 2</strong> ❌ <span id="hr-goal3-perc" style="font-weight: 500;"></span></li>
-                                    <!-- Meta mantida: 2/2 -->
+                                    <!-- Meta 4: Vagas de CS (Usada no Ambar Spritz) -->
                                     <li style="margin-top: 8px;">Vagas de CS:<br><strong>2 / 2</strong> ✅ <span id="hr-goal4-perc" style="font-weight: 500;"></span></li>
                                 </ul>
                             </div>
@@ -2079,11 +2090,11 @@
                             <h5 class="upgrade-title">Business Systems Analyst</h5>
                             <div class="upgrade-challenge" style="padding: 0;">
                                 <ul class="upgrade-goal-list" style="line-height: 1.8;">
-                                    <!-- Meta mantida: 55%/60% -->
+                                    <!-- Meta 1: Média de Billable (Usada no Red Velvet) -->
                                     <li>Média de Billable:<br><strong>55% / 60%</strong> ❌ <span id="bsa-goal1-perc" style="font-weight: 500;"></span></li>
-                                    <!-- Meta mantida: 45%/75% -->
+                                    <!-- Meta 2: Projetos com Go Lives (Usada no Red Velvet) -->
                                     <li style="margin-top: 8px;">Projetos com Go Lives:<br><strong>45% / 75%</strong> ❌ <span id="bsa-goal2-perc" style="font-weight: 500;"></span></li>
-                                    <!-- Meta mantida: 15%/50% -->
+                                    <!-- Meta 3: Conversão de Pré vendas + Buddy (Usada no Ambar Spritz) -->
                                     <li style="margin-top: 8px;">Conversão de Pré vendas +<br>Buddy:<br><strong>15% / 50%</strong> ❌ <span id="bsa-goal3-perc" style="font-weight: 500;"></span></li>
                                 </ul>
                             </div>
@@ -2096,7 +2107,7 @@
                             <h5 class="upgrade-title">Customer<br>Success</h5>
                             <div class="upgrade-challenge" style="padding: 0;">
                                 <ul class="upgrade-goal-list">
-                                    <!-- Meta mantida: 8/10 -->
+                                    <!-- Meta 1: Planos Convertidos (Usada no Red Velvet) -->
                                     <li>Planos Convertidos:<br><strong>8 / 10</strong> ❌ <span id="cs-goal1-perc" style="font-weight: 500;"></span></li>
                                 </ul>
                             </div>
@@ -2251,7 +2262,9 @@
             // === EASTER EGG LISTENERS ===
             const cubaLibreBtn = document.getElementById('cuba-libre-btn');
             const redVelvetBtn = document.getElementById('red-velvet-btn');
-            const aperolSpritzBtn = document.getElementById('aperol-spritz-btn');
+            const negroniBtn = document.getElementById('negroni-btn');
+            const ambarSpritzBtn = document.getElementById('ambar-spritz-btn');
+
 
             // Cuba Libre (Misto: Imagem + Emojis)
             if (cubaLibreBtn) {
@@ -2261,15 +2274,21 @@
                 });
             }
 
-            // Red Velvet e Aperol Spritz (Apenas Emojis)
+            // Red Velvet, Negroni e Ambar Spritz (Apenas Emojis)
             if (redVelvetBtn) {
                 redVelvetBtn.addEventListener('click', (e) => {
                     e.preventDefault(); 
                     spawnRisingFaces(20, 'emoji');
                 });
             }
-            if (aperolSpritzBtn) {
-                aperolSpritzBtn.addEventListener('click', (e) => {
+            if (negroniBtn) {
+                negroniBtn.addEventListener('click', (e) => {
+                    e.preventDefault(); 
+                    spawnRisingFaces(20, 'emoji');
+                });
+            }
+            if (ambarSpritzBtn) {
+                ambarSpritzBtn.addEventListener('click', (e) => {
                     e.preventDefault(); 
                     spawnRisingFaces(20, 'emoji');
                 });
@@ -2773,33 +2792,33 @@
                 // Metas ATUALIZADAS
                 const goals = {
                     directSales: [
-                        // Meta 1: Planos Multianuais (Mantido 6/10)
+                        // Meta 1: Planos Multianuais (Usada no Cuba Libre)
                         { current: 6, target: 10, id: 'ds-goal1-perc' }, 
-                        // Meta 2: MRR & NRR Outubro (Mantido 1/1)
+                        // Meta 2: MRR & NRR Outubro (Usada no Cuba Libre)
                         { current: 1, target: 1, id: 'ds-goal2-perc' },
-                        // Meta 3: MRR & NRR Novembro (Mantido 0/1)
+                        // Meta 3: MRR & NRR Novembro (Usada no Negroni)
                         { current: 0, target: 1, id: 'ds-goal3-perc' }
                     ],
                     humanResources: [
-                        // Meta 1: Vagas de BSA's (ATUALIZADO: 5/8)
+                        // Meta 1: Vagas de BSA's (Usada no Ambar Spritz)
                         { current: 5, target: 8, id: 'hr-goal1-perc' },
-                        // Meta 2: Vagas de Direct Sales (Mantido 5/10)
+                        // Meta 2: Vagas de Direct Sales (Usada no Negroni)
                         { current: 5, target: 10, id: 'hr-goal2-perc' },
-                        // Meta 3: Vagas de Financeiro (Mantido 1/2)
+                        // Meta 3: Vagas de Financeiro (Usada no Negroni)
                         { current: 1, target: 2, id: 'hr-goal3-perc' },
-                        // Meta 4: Vagas de CS (Mantido 2/2)
+                        // Meta 4: Vagas de CS (Usada no Ambar Spritz)
                         { current: 2, target: 2, id: 'hr-goal4-perc' }
                     ],
                     bsa: [
-                        // Meta 1: Média de Billable (Mantido 55/60)
+                        // Meta 1: Média de Billable (Usada no Red Velvet)
                         { current: 55, target: 60, id: 'bsa-goal1-perc' },
-                        // Meta 2: Projetos com Go Lives (Mantido 45/75)
+                        // Meta 2: Projetos com Go Lives (Usada no Red Velvet)
                         { current: 45, target: 75, id: 'bsa-goal2-perc' },
-                        // Meta 3: Conversão de Pré vendas + Buddy (Mantido 15/50)
+                        // Meta 3: Conversão de Pré vendas + Buddy (Usada no Ambar Spritz)
                         { current: 15, target: 50, id: 'bsa-goal3-perc' }
                     ],
                     customerSuccess: [
-                        // Meta 1: Planos Convertidos (Mantido 8/10)
+                        // Meta 1: Planos Convertidos (Usada no Red Velvet)
                         { current: 8, target: 10, id: 'cs-goal1-perc' }
                     ]
                 };
