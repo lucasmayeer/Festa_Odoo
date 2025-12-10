@@ -1961,15 +1961,15 @@
                                 </ul>
                             ">Ambar Spritz 🔒</div>
 
-                            <!-- 2. NEGRONI (Anteriormente Aperol Spritz) -->
-                            <div class="map-button locked-item" id="negroni-btn" data-tooltip-html="
+                            <!-- 2. NEGRONI (LIBERADO) -->
+                            <div class="map-button" id="negroni-btn" style="background-color: #E4A900; border-color: #E4A900; color: #714B67; font-weight: 700;" data-tooltip-html="
                                 <strong>Negroni:</strong> Gin Gordons, Vermouth Rosso e Campari.<br><br>
                                 <strong>META A SER BATIDA (INTEGRALMENTE):</strong> 
                                 <ul>
                                     <li><em>Direct Sales:</em> MRR & NRR de Novembro superar os de Outubro.</li>
                                     <li><em>Human Resources:</em> Vagas de Direct Sales e Vagas de Financeiro.</li>
                                 </ul>
-                            ">Negroni 🔒</div>
+                            ">Negroni 🔓</div>
 
                             <!-- 3. Red Velvet -->
                             <div class="map-button locked-item" id="red-velvet-btn" data-tooltip-html="
@@ -1982,13 +1982,13 @@
                             ">Red Velvet 🔒</div>
 
                             <!-- 4. Cuba Libre (Easter Egg) -->
-                            <div class="map-button locked-item" id="cuba-libre-btn" data-tooltip-html="
-                                <strong>Cuba Libre:</strong> Bacardi Oro, Coca-Cola e limão tahiti.<br><br> 
-                                <strong>META A SER BATIDA (INTEGRALMENTE):</strong> 
+                            <div class="map-button" id="cuba-libre-btn" style="background-color: #E4A900; border-color: #E4A900; color: #714B67; font-weight: 700;" data-tooltip-html="
+                                <strong>Cuba Libre:</strong> Bacardi Oro, Coca-Cola e limão tahiti.<br><br>
+                                <strong>META A SER BATIDA (INTEGRALMENTE):</strong>
                                 <ul>
                                     <li><em>Direct Sales:</em> Planos Multianuais e MRR & NRR de Outubro superar os de Setembro.</li>
                                 </ul>
-                            ">Cuba Libre 🔒</div>
+                            ">Cuba Libre 🔓</div>
                             
                         </div>
                     </div>
@@ -2054,12 +2054,12 @@
                             <h5 class="upgrade-title">Direct<br>Sales</h5>
                             <div class="upgrade-challenge" style="padding: 0;">
                                 <ul class="upgrade-goal-list">
-                                    <!-- Meta 1: Planos Multianuais (Usada no Cuba Libre) -->
-                                    <li>Planos Multianuais:<br><strong>9 / 10</strong> ❌ <span id="ds-goal1-perc" style="font-weight: 500;"></span></li>
+                                    <!-- Meta 1: Planos Multianuais (Usada no Cuba Libre) - ATUALIZADA PARA 10/10 -->
+                                    <li>Planos Multianuais:<br><strong>10 / 10</strong> ✅ <span id="ds-goal1-perc" style="font-weight: 500;"></span></li>
                                     <!-- Meta 2: MRR & NRR Outubro (Usada no Cuba Libre) -->
                                     <li style="margin-top: 8px;">MRR & NRR de Outubro<br>superar os de Setembro:<br><strong>1 / 1</strong> ✅ <span id="ds-goal2-perc" style="font-weight: 500;"></span></li>
                                     <!-- Meta 3: MRR & NRR Novembro (Usada no Negroni) -->
-                                    <li style="margin-top: 8px;">MRR & NRR de Novembro<br>superar os de Outubro:<br><strong>0 / 1</strong> ❌ <span id="ds-goal3-perc" style="font-weight: 500;"></span></li>
+                                    <li style="margin-top: 8px;">MRR & NRR de Novembro<br>superar os de Outubro:<br><strong>1 / 1</strong> ✅ <span id="ds-goal3-perc" style="font-weight: 500;"></span></li>
                                 </ul>
                             </div>
                         </div>
@@ -2074,7 +2074,7 @@
                                     <!-- Meta 1: Vagas de BSA's (Usada no Ambar Spritz) -->
                                     <li>Vagas de BSA's:<br><strong>8 / 8</strong> ✅ <span id="hr-goal1-perc" style="font-weight: 500;"></span></li>
                                     <!-- Meta 2: Vagas de Direct Sales (Usada no Negroni) -->
-                                    <li style="margin-top: 8px;">Vagas de Direct Sales:<br><strong>9 / 10</strong> ❌ <span id="hr-goal2-perc" style="font-weight: 500;"></span></li>
+                                    <li style="margin-top: 8px;">Vagas de Direct Sales:<br><strong>10 / 10</strong> ✅ <span id="hr-goal2-perc" style="font-weight: 500;"></span></li>
                                     <!-- Meta 3: Vagas de Financeiro (Usada no Negroni) -->
                                     <li style="margin-top: 8px;">Vagas de Financeiro:<br><strong>3 / 2</strong> ✅ <span id="hr-goal3-perc" style="font-weight: 500;"></span></li>
                                     <!-- Meta 4: Vagas de CS (Usada no Ambar Spritz) -->
@@ -2205,7 +2205,7 @@
         
         // --- LÓGICA DO EASTER EGG CUBA LIBRE ---
         function spawnRisingFaces(count = 25, type = 'mixed') {
-            const faceEmojis = ['🥳', '✨', '🔥', '💖', '😎', '🎉', '💃', '🕺', '🍸', '🍾', '🥂'];
+            const faceEmojis = ['🥳', '✨', '🔥', '💖', '😎', '🎉', '🕺', '🍸', '🍾', '🥂'];
             const imagePath = 'eegg_cb.png';
             const screenWidth = window.innerWidth;
             const elementSize = 60; // Largura/altura base para imagens e emojis
@@ -2792,18 +2792,18 @@
                 // Metas ATUALIZADAS
                 const goals = {
                     directSales: [
-                        // Meta 1: Planos Multianuais (Usada no Cuba Libre)
-                        { current: 9, target: 10, id: 'ds-goal1-perc' }, 
+                        // Meta 1: Planos Multianuais (Usada no Cuba Libre) - ATUALIZADA PARA 10/10
+                        { current: 10, target: 10, id: 'ds-goal1-perc' }, 
                         // Meta 2: MRR & NRR Outubro (Usada no Cuba Libre)
                         { current: 1, target: 1, id: 'ds-goal2-perc' },
-                        // Meta 3: MRR & NRR Novembro (Usada no Negroni)
-                        { current: 0, target: 1, id: 'ds-goal3-perc' }
+                        // Meta 3: MRR & NRR Novembro (Usada no Negroni) -- AGORA ATINGIDA
+                        { current: 1, target: 1, id: 'ds-goal3-perc' }
                     ],
                     humanResources: [
                         // Meta 1: Vagas de BSA's (Usada no Ambar Spritz) - ATUALIZADO
                         { current: 8, target: 8, id: 'hr-goal1-perc' },
-                        // Meta 2: Vagas de Direct Sales (Usada no Negroni) - ATUALIZADO
-                        { current: 9, target: 10, id: 'hr-goal2-perc' },
+                        // Meta 2: Vagas de Direct Sales (Usada no Negroni) - AGORA ATINGIDA
+                        { current: 10, target: 10, id: 'hr-goal2-perc' },
                         // Meta 3: Vagas de Financeiro (Usada no Negroni) - ATUALIZADO
                         { current: 3, target: 2, id: 'hr-goal3-perc' },
                         // Meta 4: Vagas de CS (Usada no Ambar Spritz)
