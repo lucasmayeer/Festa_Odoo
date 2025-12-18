@@ -155,6 +155,7 @@
             animation: fadeIn 0.8s ease-in-out;
             text-align: center;
             padding: 40px 0;
+            position: relative;
         }
         .page-section.active {
             display: flex;
@@ -162,6 +163,39 @@
 
         #cronometro, #informacoes-gerais, #cardapio, #presidents-club {
             min-height: calc(100vh - 200px);
+        }
+
+        /* --- ESTILOS NUVEM DE PALAVRAS GLOBAL --- */
+        .word-cloud-container {
+            position: fixed; /* Fixo para cobrir todo o site */
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0; /* Fica atrás de quase tudo, mas na frente das partículas maiores se desejar */
+            overflow: hidden;
+            pointer-events: none;
+            opacity: 0.4; /* Ajuste sutil para não ofuscar o conteúdo principal */
+        }
+
+        .cloud-word {
+            position: absolute;
+            white-space: nowrap;
+            font-weight: 800;
+            text-transform: uppercase;
+            user-select: none;
+            animation: moveWord linear infinite;
+            filter: blur(0.5px);
+            letter-spacing: 1px;
+            opacity: 0.15;
+        }
+
+        @keyframes moveWord {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, -30px) rotate(2deg); }
+            50% { transform: translate(-30px, 40px) rotate(-1deg); }
+            75% { transform: translate(40px, 10px) rotate(1deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
         }
 
         @keyframes fadeIn {
@@ -172,6 +206,7 @@
         .countdown-container {
             position: relative;
             text-align: center;
+            z-index: 2;
         }
 
         .countdown-title {
@@ -1665,6 +1700,9 @@
     <!-- ELEMENTO PARA O TOOLTIP PERSONALIZADO (ADICIONADO) -->
     <div id="custom-tooltip"></div>
     
+    <!-- NUVEM DE PALAVRAS GLOBAL (MOVIDA PARA FORA) -->
+    <div class="word-cloud-container" id="word-cloud"></div>
+
     <canvas id="particles-canvas"></canvas>
     <div class="particle particle1"></div>
     <div class="particle particle2"></div>
@@ -1951,15 +1989,15 @@
                             <div class="map-button">Caipirinhas</div>
                             <div class="map-button">Gin Tônica</div>
                             
-                            <!-- 1. AMBAR SPRITZ (Novo drink) -->
-                            <div class="map-button locked-item" id="ambar-spritz-btn" data-tooltip-html="
+                            <!-- 1. AMBAR SPRITZ (LIBERADO) -->
+                            <div class="map-button" id="ambar-spritz-btn" style="background-color: #E4A900; border-color: #E4A900; color: #714B67; font-weight: 700;" data-tooltip-html="
                                 <strong>Ambar Spritz:</strong> Aperol, espumante brut e água com gás.<br><br>
                                 <strong>META A SER BATIDA (INTEGRALMENTE):</strong> 
                                 <ul>
                                     <li><em>Human Resources:</em> Vagas de BSA's e Vagas de CS.</li>
                                     <li><em>BSA:</em> Conversão de Pré vendas + Buddy.</li>
                                 </ul>
-                            ">Ambar Spritz 🔒</div>
+                            ">Ambar Spritz 🔓</div>
 
                             <!-- 2. NEGRONI (LIBERADO) -->
                             <div class="map-button" id="negroni-btn" style="background-color: #E4A900; border-color: #E4A900; color: #714B67; font-weight: 700;" data-tooltip-html="
@@ -2090,12 +2128,12 @@
                             <h5 class="upgrade-title">Business Systems Analyst</h5>
                             <div class="upgrade-challenge" style="padding: 0;">
                                 <ul class="upgrade-goal-list" style="line-height: 1.8;">
-                                    <!-- Meta 1: Média de Billable (Usada no Red Velvet) -->
-                                    <li>Média de Billable:<br><strong>67.79% / 60%</strong> ✅ <span id="bsa-goal1-perc" style="font-weight: 500;"></span></li>
-                                    <!-- Meta 2: Projetos com Go Lives (Usada no Red Velvet) -->
-                                    <li style="margin-top: 8px;">Projetos com Go Lives:<br><strong>20% / 75%</strong> ❌ <span id="bsa-goal2-perc" style="font-weight: 500;"></span></li>
-                                    <!-- Meta 3: Conversão de Pré vendas + Buddy (Usada no Ambar Spritz) -->
-                                    <li style="margin-top: 8px;">Conversão de Pré vendas +<br>Buddy:<br><strong>41% / 50%</strong> ❌ <span id="bsa-goal3-perc" style="font-weight: 500;"></span></li>
+                                    <!-- Meta 1: Média de Billable (Usada no Red Velvet) - ATUALIZADO -->
+                                    <li>Média de Billable:<br><strong>70.15% / 60%</strong> ✅ <span id="bsa-goal1-perc" style="font-weight: 500;"></span></li>
+                                    <!-- Meta 2: Projetos com Go Lives (Usada no Red Velvet) - ATUALIZADO -->
+                                    <li style="margin-top: 8px;">Projetos com Go Lives:<br><strong>75% / 75%</strong> ✅ <span id="bsa-goal2-perc" style="font-weight: 500;"></span></li>
+                                    <!-- Meta 3: Conversão de Pré vendas + Buddy (Usada no Ambar Spritz) - ATUALIZADO -->
+                                    <li style="margin-top: 8px;">Conversão de Pré vendas +<br>Buddy:<br><strong>51% / 50%</strong> ✅ <span id="bsa-goal3-perc" style="font-weight: 500;"></span></li>
                                 </ul>
                             </div>
                         </div>
@@ -2255,9 +2293,51 @@
             }
         }
 
+        // --- LÓGICA DA NUVEM DE PALAVRAS MELHORADA (ESTILO FUNDO) ---
+        function initWordCloud() {
+            const container = document.getElementById('word-cloud');
+            const words = ["É AMANHÃ"];
+            const colors = ['#714B67', '#E4A900', '#21B799', '#E46E78', '#017E84', '#FFFFFF'];
+            
+            // Aumentei a quantidade para cobrir melhor o site todo
+            const wordCount = 35; 
+
+            for (let i = 0; i < wordCount; i++) {
+                const span = document.createElement('span');
+                span.textContent = words[0];
+                span.className = 'cloud-word';
+                
+                // Randomiza a cor seguindo a paleta do site
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                span.style.color = color;
+                span.style.textShadow = `0 0 10px ${color}33`; // Brilho sutil da cor correspondente
+
+                // Configurações aleatórias de tamanho e posicionamento em %
+                // Mantive tamanhos variados para profundidade, mas com opacidade fixa baixa no CSS
+                const fontSize = Math.random() * (3.5 - 1.2) + 1.2;
+                const top = Math.random() * 95;
+                const left = Math.random() * 90;
+                
+                // Variância no movimento (mais lentos e suaves por ser fundo global)
+                const duration = Math.random() * (25 - 12) + 12;
+                const delay = Math.random() * -20;
+
+                span.style.fontSize = `${fontSize}em`;
+                span.style.top = `${top}%`;
+                span.style.left = `${left}%`;
+                span.style.animationDuration = `${duration}s`;
+                span.style.animationDelay = `${delay}s`;
+
+                container.appendChild(span);
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             // Inicializa o novo sistema de tooltip
             initializeCustomTooltip();
+
+            // Inicializa a Nuvem de Palavras Global
+            initWordCloud();
 
             // === EASTER EGG LISTENERS ===
             const cubaLibreBtn = document.getElementById('cuba-libre-btn');
@@ -2650,7 +2730,7 @@
                 },
                 {
                     question: "Como será feita a premiação do President's Club?",
-                    answer: "Os prêmios serão anunciados na festa, mas entregues na segunda-feira (22/12/2025) no escritório, com maior segurança e comodidade para os ganhadores."
+                    answer: "Os prêmios serão anúncios na festa, mas entregues na segunda-feira (22/12/2025) no escritório, com maior segurança e comodidade para os ganhadores."
                 },
                 {
                     question: "Preciso levar convite?",
@@ -2810,12 +2890,12 @@
                         { current: 2, target: 2, id: 'hr-goal4-perc' }
                     ],
                     bsa: [
-                        // Meta 1: Média de Billable (Usada no Red Velvet) - ATUALIZADO
-                        { current: 67.79, target: 60, id: 'bsa-goal1-perc' },
-                        // Meta 2: Projetos com Go Lives (Usada no Red Velvet)
-                        { current: 20, target: 75, id: 'bsa-goal2-perc' },
-                        // Meta 3: Conversão de Pré vendas + Buddy (Usada no Ambar Spritz)
-                        { current: 41, target: 50, id: 'bsa-goal3-perc' }
+                        // Meta 1: Média de Billable (Usada no Red Velvet) - ATUALIZADO 70.15%
+                        { current: 70.15, target: 60, id: 'bsa-goal1-perc' },
+                        // Meta 2: Projetos com Go Lives (Usada no Red Velvet) - ATUALIZADO 75%
+                        { current: 75, target: 75, id: 'bsa-goal2-perc' },
+                        // Meta 3: Conversão de Pré vendas + Buddy (Usada no Ambar Spritz) - ATUALIZADO 51%
+                        { current: 51, target: 50, id: 'bsa-goal3-perc' }
                     ],
                     customerSuccess: [
                         // Meta 1: Planos Convertidos (Usada no Red Velvet) - ATUALIZADO PARA 10/10
